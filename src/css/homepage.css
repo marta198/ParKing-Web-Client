@@ -208,7 +208,7 @@
     align-items: center;
     flex-direction: column;
     gap: 10px;
-    background-color: rgb(var(--secondary-color));
+    background-color: rgba(var(--secondary-color) , 0.25);
     width: 200px;
     padding: 40px 50px;
     border-radius: 10px;
