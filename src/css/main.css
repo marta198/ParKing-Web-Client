@@ -7,6 +7,8 @@
 @import "header.css";
 @import "footer.css";
 @import "interactables.css";
+@import "popup.css";
+@import "maps.css";
 
 body {
     background-color: rgba(var(--background-color), 1);
@@ -19,7 +21,7 @@ body {
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 * {

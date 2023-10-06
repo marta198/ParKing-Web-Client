@@ -1,5 +1,4 @@
-//listen out for when id light-theme-toggle and dark-theme-toggle is clicked, hide one another and load in either css colors-light.css or colors-dark.css
-
+//For switching between light and dark theme
 const lightThemeBtn = document.getElementById('light-theme-toggle');
 const darkThemeBtn = document.getElementById('dark-theme-toggle');
 
@@ -14,3 +13,21 @@ darkThemeBtn.addEventListener('click', () => {
     lightThemeBtn.classList.remove('hide');
     document.getElementById('theme-style').href = 'src/css/colors-light.css';
 });
+
+const popupBackgroundObj = document.getElementById("popup-background");
+const mainBodyObj = document.getElementById("main-body");
+let popupObj = null;
+
+//For closing and opening popups
+function closePopup() {
+    document.getElementById(popupObj).classList.add('hide');
+    popupBackgroundObj.classList.add('hide');
+    mainBodyObj.classList.remove('popup-blur');
+}
+
+function openPopup(popup) {
+    popupObj = popup;
+    document.getElementById(popupObj).classList.remove('hide');
+    popupBackgroundObj.classList.remove('hide');
+    mainBodyObj.classList.add('popup-blur');
+}

@@ -8,7 +8,7 @@
     left: 0;
     width: 100%;
     background-color: rgb(var(--background-color));
-    z-index: 999;
+    z-index: 9;
 }
 
 .header{

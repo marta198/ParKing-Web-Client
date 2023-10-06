@@ -27,6 +27,10 @@
     background: linear-gradient(180deg, rgba(var(--background-color), 1) 0%, rgba(var(--background-color), 0) 100%);
 }
 
-.dropshadow{
-    box-shadow: var(--dropshadow);
+.popup{
+    background-color: rgb(var(--background-color)) !important;
+}
+
+.login-form{
+    background-color: rgb(var(--background-color));
 }

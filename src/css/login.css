@@ -16,7 +16,6 @@
     gap: 20px;
     padding: 20px;
     border-radius: 10px;
-    background-color: rgb(var(--secondary-color));
     box-shadow: var(--dropshadow);
 }
 

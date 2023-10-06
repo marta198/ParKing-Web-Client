@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <header class="header-container" id="header">
+    <header class="header-container popup-blur" id="header">
         <div class="header">
             <img src="src/img/logo.png" alt="ParKing" class="logo">
             <div class="header-links">
@@ -39,28 +39,116 @@
             </div>
         </div>
     </header>
-    <div class="account-container">
+    <!-- User settings popup -->
+    <div class="popup dropshadow hide" id="popup-account">
+        <svg class="close-popup" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+            <path fill="rgb(var(--text-color))" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41z" />
+        </svg>
+        <h2 class="popup-title">Account Settings</h2>
+        <div class="user-account-settings-inputs">
+            <div style="background-image: url('src/img/pfp.jpg');" class="user-pfp">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="user-settings-button">
+                    <path fill="rgb(var(--primary-color))" d="m19.3 8.925l-4.25-4.2l1.4-1.4q.575-.575 1.413-.575t1.412.575l1.4 1.4q.575.575.6 1.388t-.55 1.387L19.3 8.925ZM4 21q-.425 0-.713-.288T3 20v-2.825q0-.2.075-.388t.225-.337l10.3-10.3l4.25 4.25l-10.3 10.3q-.15.15-.337.225T6.825 21H4Z" />
+                </svg>
+            </div>
+            <div class="user-account-settings-input">
+                <label for="email">Email change</label>
+                <input type="text" name="email" id="email" placeholder="your@email.com" class="input">
+            </div>
+            <div class="user-account-password-change">
+                <div class="user-account-settings-input">
+                    <label for="password">Password change</label>
+                    <input type="password" name="password" id="password" placeholder="Current password" class="input">
+                </div>
+                <div class="user-account-settings-password-confirm">
+                    <div>
+                        <input type="password" name="new-password" id="new-password" placeholder="New password" class="input">
+                    </div>
+                    <div>
+                        <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm password" class="input">
+                    </div>
+                </div>
+            </div>
+            <div class="user-account-update">
+                <button class="btn btn-primary">Update</button>
+            </div>
+        </div>
+        <div class="user-delete-account">
+            <button class="btn btn-secondary" style="background-color: rgb(var(--danger-color)); color: white;">Cancel Subscription</button>
+            <button class="btn btn-secondary" style="background-color: rgb(var(--danger-color)); color: white;">Delete Account</button>
+        </div>
+    </div>
+    <!-- Add a parking space popup -->
+    <div class="popup dropshadow hide" id="popup-add-parking">
+        <svg class="close-popup" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+            <path fill="rgb(var(--text-color))" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41z" />
+        </svg>
+        <h2 class="popup-title">Add a parking space</h2>
+        <div class="user-account-settings-inputs max-input-width">
+            <div class="input-stack">
+                <input type="text" placeholder="Address" class="input" name="address" id="address">
+                <input type="text" placeholder="Owned by.. (optional)" class="input" name="owned-by" id="owned-by">
+                <input type="text" placeholder="Price (optional)" class="input" name="price" id="price">
+                <input type="text" placeholder="Spots available" class="input" name="spots-available" id="spots-available">
+            </div>
+            <div class="user-account-settings-input">
+                <label for="email">Additional information (optional)</label>
+                <textarea name="additional-info" id="additional-info" cols="30" rows="10" class="input input-textarea" placeholder="Additional information"></textarea>
+            </div>
+            <div class="user-account-update">
+                <button class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+    <!-- Check on parking info -->
+    <div class="popup dropshadow hide" id="popup-parking-info">
+        <svg class="close-popup" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+            <path fill="rgb(var(--text-color))" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41z" />
+        </svg>
+        <h2 class="popup-title">Slokas iela 28, Zemgales priekšpilsēta, Rīga</h2>
+        <div class="user-account-settings-inputs max-input-width popup-row">
+            <div class="input-stack parking-info-text">
+                <div class="input-stack">
+                    <div><b>Reserved till:</b> 16:30 (20.09.2023)</div>
+                    <div><b>Price:</b> €3.20/h</div>
+                </div>
+                <button class="btn btn-secondary" style="background-color: rgb(var(--danger-color)); color: white;">Cancel</button>
+            </div>
+            <div class="mapouter">
+                <iframe class="gmap_canvas width=" 200" height="200" id="gmap_canvas" src="https://maps.google.com/maps?q=Slokas%20iela%2028&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="popup-background hide" id="popup-background" onclick="closePopup()"></div>
+    <!-- Main user profile page -->
+    <div class="account-container" id="main-body">
         <div class="user-lvl-container">
+            <div style="background-image: url('src/img/pfp.jpg');" class="user-pfp">
+                <svg onclick="openPopup('popup-account')" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="user-settings-button">
+                    <path fill="rgb(var(--primary-color))" d="m19.3 8.925l-4.25-4.2l1.4-1.4q.575-.575 1.413-.575t1.412.575l1.4 1.4q.575.575.6 1.388t-.55 1.387L19.3 8.925ZM4 21q-.425 0-.713-.288T3 20v-2.825q0-.2.075-.388t.225-.337l10.3-10.3l4.25 4.25l-10.3 10.3q-.15.15-.337.225T6.825 21H4Z" />
+                </svg>
+            </div>
             <div class="user-current-lvl">
                 <h2>Level</h2>
                 <h1 class="gradient-text">16</h1>
             </div>
             <div class="user-xp-container">
                 <div class="user-xp-bar">
-                    <div class="user-xp-bar-fill"></div>
+                    <div class="user-xp-bar-fill">
+                        <p class="user-xp-bar-text">XP - 5210/6000</p>
+                    </div>
                 </div>
-                <p>XP - 5210/6000</p>
-            </div>
-            <button class="btn btn-primary">
-                <h3>Add Parking Space<h3>
-            </button>
-        </div>
-        <div class="user-info-container">
-            <div class="user-info-left">
                 <div class="current-plan">
                     <p>Current plan: <b class="gradient-text" style="text-transform: uppercase;">premium</b></p>
                     <p>Expiration date: <b class="gradient-text">5th Jun, 2024 23:59</b></p>
+                    <button class="btn btn-primary add-space-button" onclick="openPopup('popup-add-parking')">
+                        Add A Parking Space
+                    </button>
                 </div>
+            </div>
+        </div>
+        <div class="user-info-container">
+            <div class="user-info-left">
                 <div class="user-parking-spaces-container">
                     <h2>My Parking Spaces</h2>
                     <div class="parking-spaces">
@@ -78,7 +166,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary">View Parking Space</button>
+                            <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking Space</button>
                         </div>
                         <div class="parking-space">
                             <div class="parking-space-info">
@@ -94,7 +182,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary">View Parking Space</button>
+                            <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking Space</button>
                         </div>
                         <div class="parking-space">
                             <div class="parking-space-info">
@@ -110,7 +198,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary">View Parking Space</button>
+                            <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking Space</button>
                         </div>
                         <div class="parking-space">
                             <div class="parking-space-info">
@@ -126,7 +214,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary">View Parking Space</button>
+                            <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking Space</button>
                         </div>
                         <div class="parking-space">
                             <div class="parking-space-info">
@@ -142,7 +230,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary">View Parking Space</button>
+                            <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking Space</button>
                         </div>
                         <div class="parking-space">
                             <div class="parking-space-info">
@@ -158,45 +246,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary">View Parking Space</button>
+                            <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking Space</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="user-info-right">
-                <div class="user-account-settings">
-                    <h2>Account Settings</h2>
-                    <div class="user-account-settings-inputs">
-                        <div class="user-account-settings-input">
-                            <label for="email">Email</label>
-                            <input type="text" name="email" id="email" placeholder="your@email.com" class="input">
-                        </div>
-                        <div class="user-account-settings-input">
-                            <label for="password">Password</label>
-                            <input type="password" name="password" id="password" placeholder="Current password" class="input">
-                        </div>
-                        <div class="user-account-settings-password-confirm">
-                            <div class="user-account-settings-input">
-                                <label for="new-password">New Password</label>
-                                <input type="password" name="new-password" id="new-password" placeholder="New password" class="input">
-                            </div>
-                            <div class="user-account-settings-input">
-                                <label for="confirm-password">Confirm Password</label>
-                                <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm password" class="input">
-                            </div>
-                        </div>
-                        <div class="user-account-update">
-                            <button class="btn btn-primary">Update</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="user-delete-account">
-                    <button class="btn btn-secondary" style="background-color: rgb(var(--danger-color)); color: white;">Cancel Subscription</button>
-                </div>
-            </div>
-        </div>
-        <div class="fav-parking-spots-container">
-        <div class="user-parking-spaces-container">
+                <div class="user-parking-spaces-container">
                     <h2>Favorites</h2>
                     <div class="parking-spaces">
                         <div class="parking-space">
@@ -213,7 +269,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary">View Parking Space</button>
+                            <div class="parking-fav-buttons">
+                                <button class="btn btn-secondary">Remove favorite</button>
+                                <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking Space</button>
+                            </div>
                         </div>
                         <div class="parking-space">
                             <div class="parking-space-info">
@@ -229,7 +288,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary">View Parking Space</button>
+                            <div class="parking-fav-buttons">
+                                <button class="btn btn-secondary">Remove favorite</button>
+                                <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking Space</button>
+                            </div>
                         </div>
                         <div class="parking-space">
                             <div class="parking-space-info">
@@ -245,7 +307,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary">View Parking Space</button>
+                            <div class="parking-fav-buttons">
+                                <button class="btn btn-secondary">Remove favorite</button>
+                                <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking Space</button>
+                            </div>
                         </div>
                         <div class="parking-space">
                             <div class="parking-space-info">
@@ -261,7 +326,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary">View Parking Space</button>
+                            <div class="parking-fav-buttons">
+                                <button class="btn btn-secondary">Remove favorite</button>
+                                <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking Space</button>
+                            </div>
                         </div>
                         <div class="parking-space">
                             <div class="parking-space-info">
@@ -277,7 +345,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary">View Parking Space</button>
+                            <div class="parking-fav-buttons">
+                                <button class="btn btn-secondary">Remove favorite</button>
+                                <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking Space</button>
+                            </div>
                         </div>
                         <div class="parking-space">
                             <div class="parking-space-info">
@@ -293,11 +364,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary">View Parking Space</button>
+                            <div class="parking-fav-buttons">
+                                <button class="btn btn-secondary">Remove favorite</button>
+                                <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking Space</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </body>
 <script src="src/js/main.js"></script>
+
+</html>
