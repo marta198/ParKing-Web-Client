@@ -10,6 +10,7 @@
     --dropshadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     --inner-shadow: inset 0px 0px 40px rgba(0, 0, 0, 0.1);
     --gradient: linear-gradient(135deg, rgba(var(--primary-color), 1) 0%, #C03535 100%);
+    --star-yellow: 255, 215, 0;
 }
 
 .dropshadow{

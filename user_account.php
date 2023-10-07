@@ -115,7 +115,7 @@
                 <button class="btn btn-secondary" style="background-color: rgb(var(--danger-color)); color: white;">Cancel</button>
             </div>
             <div class="mapouter">
-                <iframe class="gmap_canvas width=" 200" height="200" id="gmap_canvas" src="https://maps.google.com/maps?q=Slokas%20iela%2028&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                <iframe class="gmap_canvas" width="200" height="200" id="gmap_canvas" src="https://maps.google.com/maps?q=Slokas%20iela%2028&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
             </div>
         </div>
     </div>

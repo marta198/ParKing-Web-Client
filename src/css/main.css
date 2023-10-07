@@ -2,13 +2,14 @@
 @import "fonts.css";
 @import "homepage.css";
 @import "login.css";
-@import "explorer.css";
+@import "parking-list.css";
 @import "userprofile.css";
 @import "header.css";
 @import "footer.css";
 @import "interactables.css";
 @import "popup.css";
 @import "maps.css";
+@import "parking-details.css";
 
 body {
     background-color: rgba(var(--background-color), 1);

@@ -88,3 +88,31 @@
         gap: 20px;
     }
 }
+
+.popup-review-stars{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+}
+
+.review-stars > svg{
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    min-height: 45px;
+}
+
+.review-stars > svg:hover{
+    cursor: pointer;
+}
+
+.popup-buttons-multiple{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+}
