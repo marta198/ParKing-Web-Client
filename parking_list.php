@@ -56,7 +56,7 @@
                 <?php
                 if (isset($_GET["sortBy"])) {
                     ?>
-                    <select name="sort-by" id="sort-by" class="dropdown" onchange="doReload({sortBy:this.value})">
+                    <select name="sort-by" id="sort-by" class="dropdown" onchange="doReload({'sortBy':this.value});">
                         <option style="display:none;" selected>Sort By</option>
                         <option value="all">All spots</option>
                         <option value="distance">Zero-Cost spots</option>
@@ -66,7 +66,7 @@
                     <?php
                 } else {
                     ?>
-                    <select name="sort-by" id="sort-by" class="dropdown" onchange="doReload({sortBy:this.value})">
+                    <select name="sort-by" id="sort-by" class="dropdown" onchange="doReload({'sortBy':this.value});">
                         <option style="display:none;" selected>Sort By</option>
                         <option value="all">All spots</option>
                         <option value="distance">Zero-Cost spots</option>
@@ -163,17 +163,22 @@
     })
 
     function doReload(reloadData) {
-        console.log(reloadData["filter"])
-        console.log((reloadData["filter"] != undefined))
-        console.log("test")
         const urlParams = new URLSearchParams(window.location.search);
+        console.log(reloadData)
         const sortByURL = urlParams.get('sortBy');
         const filterURL = urlParams.get('filter');
         if (reloadData["sortBy"]) {
             if (reloadData["sortBy"] == "price") {
-                if (sortByURL == "priceAsc") urlParams.set('sortBy', "priceDesc");
-                else if (sortByURL == "priceDesc") urlParams.set('sortBy', "priceAsc");
-                else urlParams.set('sortBy', "priceAsc");
+                urlParams.set('sortBy', "priceAsc");
+            }
+            if (reloadData["sortBy"] == "distance") {
+                urlParams.set('sortBy', "distance");
+            }
+            if (reloadData["sortBy"] == "all") {
+                urlParams.set('sortBy', "all");
+            }
+            if (reloadData["sortBy"] == "disabled") {
+                urlParams.set('sortBy', "disabled");
             }
         }
         if (reloadData["filter"] != undefined) {
