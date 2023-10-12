@@ -181,7 +181,11 @@ require('./src/php/loadProfile.php') ?>
                             ?>
                         </b></p>
                     <!-- WIP -->
-                    <p>Expiration date: <b class="gradient-text">5th Jun, 2024 23:59</b></p>
+                    <?php
+                    if ($_SESSION['isPremium'] != NULL) {
+                        echo '<p>Expiration date: <b class="gradient-text">' . $_SESSION['premiumExpDate'] . '</b></p>';
+                    }
+                    ?>
                     <button class="btn btn-primary add-space-button" onclick="openPopup('popup-add-parking')">
                         Add A Parking Space
                     </button>
