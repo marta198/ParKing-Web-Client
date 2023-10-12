@@ -213,7 +213,7 @@ error_reporting(E_ALL);
                                     echo '<div class="parking-space-info-details">';
                                     echo '<div>';
                                     echo '<b>Price</b>';
-                                    echo '<p>' . $reservation['parking_price'] . '</p>';
+                                    echo '<p>' . $reservation['price'] . '</p>';
                                     echo '</div>';
                                     echo '<div>';
                                     echo '<b style="display: none;">Rating</b>';
