@@ -22,4 +22,8 @@ $_SESSION['username'] = $row['username'];
 $stmt = "SELECT * FROM reservation_list WHERE username = '" . $_SESSION['username'] . "' ORDER BY start_time DESC";
 $result = $pdo->query($stmt);
 $_SESSION["reservation_list"] = $result->fetchAll(PDO::FETCH_ASSOC);
+
+$stmt = "SELECT * FROM favorites_list WHERE username = '" . $_SESSION['username'] ."'";
+$result = $pdo->query($stmt);
+$_SESSION["favorites_list"] = $result->fetchAll(PDO::FETCH_ASSOC);
 ?>

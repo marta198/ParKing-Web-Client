@@ -235,126 +235,37 @@ error_reporting(E_ALL);
                 <div class="user-parking-spaces-container">
                     <h2>Favorites</h2>
                     <div class="parking-spaces">
-                        <div class="parking-space">
-                            <div class="parking-space-info">
-                                <h3><b>Slokas iela 28, Zemgales priekšpilsēta, Rīga</b></h3>
-                                <div class="parking-space-info-details">
-                                    <div>
-                                        <b>Price</b>
-                                        <p>10$</p>
-                                    </div>
-                                    <div>
-                                        <b>Rating</b>
-                                        <p>4.5/5</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="parking-fav-buttons">
-                                <button class="btn btn-secondary">Remove favorite</button>
-                                <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking
-                                    Space</button>
-                            </div>
-                        </div>
-                        <div class="parking-space">
-                            <div class="parking-space-info">
-                                <h3><b>Slokas iela 28, Zemgales priekšpilsēta, Rīga</b></h3>
-                                <div class="parking-space-info-details">
-                                    <div>
-                                        <b>Price</b>
-                                        <p>10$</p>
-                                    </div>
-                                    <div>
-                                        <b>Rating</b>
-                                        <p>4.5/5</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="parking-fav-buttons">
-                                <button class="btn btn-secondary">Remove favorite</button>
-                                <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking
-                                    Space</button>
-                            </div>
-                        </div>
-                        <div class="parking-space">
-                            <div class="parking-space-info">
-                                <h3><b>Slokas iela 28, Zemgales priekšpilsēta, Rīga</b></h3>
-                                <div class="parking-space-info-details">
-                                    <div>
-                                        <b>Price</b>
-                                        <p>10$</p>
-                                    </div>
-                                    <div>
-                                        <b>Rating</b>
-                                        <p>4.5/5</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="parking-fav-buttons">
-                                <button class="btn btn-secondary">Remove favorite</button>
-                                <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking
-                                    Space</button>
-                            </div>
-                        </div>
-                        <div class="parking-space">
-                            <div class="parking-space-info">
-                                <h3><b>Slokas iela 28, Zemgales priekšpilsēta, Rīga</b></h3>
-                                <div class="parking-space-info-details">
-                                    <div>
-                                        <b>Price</b>
-                                        <p>10$</p>
-                                    </div>
-                                    <div>
-                                        <b>Rating</b>
-                                        <p>4.5/5</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="parking-fav-buttons">
-                                <button class="btn btn-secondary">Remove favorite</button>
-                                <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking
-                                    Space</button>
-                            </div>
-                        </div>
-                        <div class="parking-space">
-                            <div class="parking-space-info">
-                                <h3><b>Slokas iela 28, Zemgales priekšpilsēta, Rīga</b></h3>
-                                <div class="parking-space-info-details">
-                                    <div>
-                                        <b>Price</b>
-                                        <p>10$</p>
-                                    </div>
-                                    <div>
-                                        <b>Rating</b>
-                                        <p>4.5/5</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="parking-fav-buttons">
-                                <button class="btn btn-secondary">Remove favorite</button>
-                                <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking
-                                    Space</button>
-                            </div>
-                        </div>
-                        <div class="parking-space">
-                            <div class="parking-space-info">
-                                <h3><b>Slokas iela 28, Zemgales priekšpilsēta, Rīga</b></h3>
-                                <div class="parking-space-info-details">
-                                    <div>
-                                        <b>Price</b>
-                                        <p>10$</p>
-                                    </div>
-                                    <div>
-                                        <b>Rating</b>
-                                        <p>4.5/5</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="parking-fav-buttons">
-                                <button class="btn btn-secondary">Remove favorite</button>
-                                <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking
-                                    Space</button>
-                            </div>
-                        </div>
+                        <?php
+                        if (empty($_SESSION['favorites_list'])) {
+                            echo '<p>You have no parking spaces reserved.</p>';
+                        } else {
+                            if (!empty($_SESSION['favorites_list'])) {
+                                foreach ($_SESSION['favorites_list'] as $favorite) {
+                                    echo '<div class="parking-space">';
+                                    echo '<div class="parking-space-info">';
+                                    echo '<h3><b>' . $favorite['address'] . '</b></h3>';
+                                    echo '<div class="parking-space-info-details">';
+                                    echo '<div>';
+                                    echo '<b>Price</b>';
+                                    echo '<p>' . $favorite['price'] . '</p>';
+                                    echo '</div>';
+                                    echo '<div>';
+                                    echo '<b style="display: none;">Rating</b>';
+                                    echo '<p style="display: none;"></p>'; // Rating not implemented yet
+                                    echo '</div>';
+                                    echo '</div>';
+                                    echo '</div>';
+                                    echo '<div class="parking-fav-buttons">';
+                                    echo '<button class="btn btn-secondary">Remove favorite</button>';
+                                    echo '<button class="btn btn-primary" onclick="openPopup(\'popup-parking-info\')">View Parking
+                                    Space</button>';
+                                    echo '</div>';
+                                    echo '</div>';
+                                }
+                            }
+                        }
+
+                        ?>
                     </div>
                 </div>
             </div>
