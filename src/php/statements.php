@@ -6,6 +6,7 @@
                                         parking.spots_taken,
                                         parking.start_time,
                                         parking.end_time,
+                                        parking.is_for_disabled,
                                         partner.company_name   
                                         FROM parking 
                                         LEFT JOIN partner 
@@ -19,6 +20,7 @@
                                         parking.spots_taken,
                                         parking.start_time,
                                         parking.end_time,
+                                        parking.is_for_disabled,
                                         partner.company_name   
                                         FROM parking 
                                         LEFT JOIN partner 
