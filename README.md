@@ -20,18 +20,18 @@ return array(
 # To do
 - [ ] REFACTOR ALL DB VARs
 # User profile
-- [ ] Use data from database:
+- [X] Use data from database:
     - [ ] Profile picture
     - [ ] Profile picture change
     - [ ] email, password change
     - [X] XP display
     - [X] Level display 
     - [ ] mechanics of XP bar and levels?
-    - [ ] Plan and expiry date display
+    - [X] Plan and expiry date display
     - [ ] Add a parking space
-    - [ ] Load parking spaces
+    - [X] Load parking spaces
     - [ ] View parking space (view reservation!)
-    - [ ] Load favorites
+    - [X] Load favorites
     - [ ] View favorites (show infopage from parking list)
 
 ## Clicking on "View Parking Space"
