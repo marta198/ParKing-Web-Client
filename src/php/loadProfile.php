@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 require('db.php');
 
 // DEBUG
@@ -23,7 +25,7 @@ $stmt = "SELECT * FROM reservation_list WHERE username = '" . $_SESSION['usernam
 $result = $pdo->query($stmt);
 $_SESSION["reservation_list"] = $result->fetchAll(PDO::FETCH_ASSOC);
 
-$stmt = "SELECT * FROM favorites_list WHERE username = '" . $_SESSION['username'] ."'";
+$stmt = "SELECT * FROM favorites_list WHERE username = '" . $_SESSION['username'] . "'";
 $result = $pdo->query($stmt);
 $_SESSION["favorites_list"] = $result->fetchAll(PDO::FETCH_ASSOC);
 ?>
