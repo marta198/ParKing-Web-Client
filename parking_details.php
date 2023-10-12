@@ -79,14 +79,15 @@
         <div class="user-account-settings-inputs max-input-width">
             <label style="text-align: center;">Select for how long you are going to stay there.</label>
             <div class="input-stack payment-slider">
-                <input type="range" min="1" max="48" class="slider" id="payment-hours" value="1">
-                <h2 id="payment-hours-value">2h | €6.80</h2>
+                <input type="range" min="1" max="48" class="slider" id="payment-hours" value="1" oninput="updateSliderValue(this.value)">
+                <h2 id="payment-hours-value">1h | €0.5</h2>
             </div>
             <div class="user-account-update">
                 <button class="btn btn-primary">Pay</button>
             </div>
         </div>
     </div>
+
     <!-- Write a report popup -->
     <div class="popup dropshadow hide" id="popup-write-report">
         <svg class="close-popup" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
@@ -95,17 +96,24 @@
         <h2 class="popup-title">Report a problem</h2>
         <div class="user-account-settings-inputs max-input-width">
             <label>Quick report</label>
-            <div class="input-stack report-quick-buttons">
-                <button class="btn btn-secondary">Parking space taken</button>
-                <button class="btn btn-secondary">Wrong parking price</button>
-                <button class="btn btn-secondary">Construction</button>
-                <button class="btn btn-secondary">Borken / missing parking meter</button>
-                <button class="btn btn-secondary">Lack of signege</button>
-                <button class="btn btn-secondary">Poor lighting</button>
-                <button class="btn btn-secondary">Safety concerns</button>
-                <button class="btn btn-secondary">Damaged pavement</button>
-                <button class="btn btn-secondary">False parking spot</button>
+            <div class="dropdown">
+                <span class="dropdown-toggle" id="quick-report-dropdown-btn" onclick="toggleDropdownContent()">Select Quick Report</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                    <path d="M7 10l5 5 5-5z"/>
+                </svg>
+                <div class="dropdown-content" id="quick-report-dropdown" aria-labelledby="quick-report-dropdown-btn">
+                    <button class="dropdown-item" onclick="selectQuickReport(this)">Parking space taken</button>
+                    <button class="dropdown-item" onclick="selectQuickReport(this)">Wrong parking price</button>
+                    <button class="dropdown-item" onclick="selectQuickReport(this)">Construction</button>
+                    <button class="dropdown-item" onclick="selectQuickReport(this)">Broken / missing parking meter</button>
+                    <button class="dropdown-item" onclick="selectQuickReport(this)">Lack of signage</button>
+                    <button class="dropdown-item" onclick="selectQuickReport(this)">Poor lighting</button>
+                    <button class="dropdown-item" onclick="selectQuickReport(this)">Safety concerns</button>
+                    <button class="dropdown-item" onclick="selectQuickReport(this)">Damaged pavement</button>
+                    <button class="dropdown-item" onclick="selectQuickReport(this)">False parking spot</button>
+                </div>
             </div>
+            
             <div class="user-account-settings-input">
                 <label>Detailed report (optional)</label>
                 <textarea name="additional-info" id="additional-info" cols="30" rows="10" class="input input-textarea" placeholder="Additional information"></textarea>
@@ -115,6 +123,38 @@
             </div>
         </div>
     </div>
+    <div class="popup-background hide" id="popup-background" onclick="closePopup()"></div>
+
+    <script>
+        function toggleDropdownContent() {
+            var dropdownContent = document.getElementById('quick-report-dropdown');
+            if (dropdownContent.style.display === 'block') {
+                dropdownContent.style.display = 'none';
+            } else {
+                dropdownContent.style.display = 'block';
+            }
+        }
+
+        function selectQuickReport(item) {
+            var selectedItem = item.textContent;
+            document.getElementById('quick-report-dropdown-btn').textContent = selectedItem;
+            closeDropdown();
+        }
+
+        function closeDropdown() {
+            var dropdownContent = document.getElementById('quick-report-dropdown');
+            dropdownContent.style.display = 'none';
+        }
+
+        function closePopup() {
+            var popup = document.getElementById('popup-write-report');
+            var popupBackground = document.getElementById('popup-background');
+            popup.classList.add('hide');
+            popupBackground.classList.add('hide');
+        }
+    </script>
+
+
     <!-- Write review popup -->
     <div class="popup dropshadow hide" id="popup-write-review">
         <svg class="close-popup" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
