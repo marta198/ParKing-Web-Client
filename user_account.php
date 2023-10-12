@@ -4,6 +4,10 @@
 session_start();
 require('./src/php/loadProfile.php') ?>
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 <head>
     <title>ParKing</title>
     <meta charset="UTF-8">
@@ -180,7 +184,6 @@ require('./src/php/loadProfile.php') ?>
                             }
                             ?>
                         </b></p>
-                    <!-- WIP -->
                     <?php
                     if ($_SESSION['isPremium'] != NULL) {
                         echo '<p>Expiration date: <b class="gradient-text">' . $_SESSION['premiumExpDate'] . '</b></p>';
@@ -197,108 +200,34 @@ require('./src/php/loadProfile.php') ?>
                 <div class="user-parking-spaces-container">
                     <h2>My Parking Spaces</h2>
                     <div class="parking-spaces">
-                        <div class="parking-space">
-                            <div class="parking-space-info">
-                                <h3><b>Slokas iela 28, Zemgales priekšpilsēta, Rīga</b></h3>
-                                <div class="parking-space-info-details">
-                                    <div>
-                                        <b>Price</b>
-                                        <p>10$</p>
-                                    </div>
-                                    <div>
-                                        <b>Rating</b>
-                                        <p>4.5/5</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking
-                                Space</button>
-                        </div>
-                        <div class="parking-space">
-                            <div class="parking-space-info">
-                                <h3><b>Slokas iela 28, Zemgales priekšpilsēta, Rīga</b></h3>
-                                <div class="parking-space-info-details">
-                                    <div>
-                                        <b>Price</b>
-                                        <p>10$</p>
-                                    </div>
-                                    <div>
-                                        <b>Rating</b>
-                                        <p>4.5/5</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking
-                                Space</button>
-                        </div>
-                        <div class="parking-space">
-                            <div class="parking-space-info">
-                                <h3><b>Slokas iela 28, Zemgales priekšpilsēta, Rīga</b></h3>
-                                <div class="parking-space-info-details">
-                                    <div>
-                                        <b>Price</b>
-                                        <p>10$</p>
-                                    </div>
-                                    <div>
-                                        <b>Rating</b>
-                                        <p>4.5/5</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking
-                                Space</button>
-                        </div>
-                        <div class="parking-space">
-                            <div class="parking-space-info">
-                                <h3><b>Slokas iela 28, Zemgales priekšpilsēta, Rīga</b></h3>
-                                <div class="parking-space-info-details">
-                                    <div>
-                                        <b>Price</b>
-                                        <p>10$</p>
-                                    </div>
-                                    <div>
-                                        <b>Rating</b>
-                                        <p>4.5/5</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking
-                                Space</button>
-                        </div>
-                        <div class="parking-space">
-                            <div class="parking-space-info">
-                                <h3><b>Slokas iela 28, Zemgales priekšpilsēta, Rīga</b></h3>
-                                <div class="parking-space-info-details">
-                                    <div>
-                                        <b>Price</b>
-                                        <p>10$</p>
-                                    </div>
-                                    <div>
-                                        <b>Rating</b>
-                                        <p>4.5/5</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking
-                                Space</button>
-                        </div>
-                        <div class="parking-space">
-                            <div class="parking-space-info">
-                                <h3><b>Slokas iela 28, Zemgales priekšpilsēta, Rīga</b></h3>
-                                <div class="parking-space-info-details">
-                                    <div>
-                                        <b>Price</b>
-                                        <p>10$</p>
-                                    </div>
-                                    <div>
-                                        <b>Rating</b>
-                                        <p>4.5/5</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary" onclick="openPopup('popup-parking-info')">View Parking
-                                Space</button>
-                        </div>
+
+                        <?php
+                        if (empty($_SESSION['reservation_list'])) {
+                            echo '<p>You have no parking spaces reserved.</p>';
+                        } else {
+                            if (!empty($_SESSION['reservation_list'])) {
+                                foreach ($_SESSION['reservation_list'] as $reservation) {
+                                    echo '<div class="parking-space">';
+                                    echo '<div class="parking-space-info">';
+                                    echo '<h3><b>' . $reservation['address'] . '</b></h3>';
+                                    echo '<div class="parking-space-info-details">';
+                                    echo '<div>';
+                                    echo '<b>Price</b>';
+                                    echo '<p>' . $reservation['parking_price'] . '</p>';
+                                    echo '</div>';
+                                    echo '<div>';
+                                    echo '<b style="display: none;">Rating</b>';
+                                    echo '<p style="display: none;"></p>'; // Rating not implemented yet
+                                    echo '</div>';
+                                    echo '</div>';
+                                    echo '</div>';
+                                    echo '<button class="btn btn-primary" onclick="openPopup(\'popup-parking-info\')">View Parking Space</button>';
+                                    echo '</div>';
+                                }
+                            }
+                        }
+
+                        ?>
                     </div>
                 </div>
             </div>
