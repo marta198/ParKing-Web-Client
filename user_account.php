@@ -2,11 +2,14 @@
 <html lang="en">
 <?php
 session_start();
-require('./src/php/loadProfile.php') ?>
+require('./src/php/loadProfile.php');
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
+
+$list_id = 0;
+?>
 
 <head>
     <title>ParKing</title>
@@ -145,12 +148,12 @@ error_reporting(E_ALL);
             <path fill="rgb(var(--text-color))"
                 d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41z" />
         </svg>
-        <h2 class="popup-title">Slokas iela 28, Zemgales priekšpilsēta, Rīga</h2>
+        <h2 class="popup-title" id="popup-address">Slokas iela 28, Zemgales priekšpilsēta, Rīga</h2>
         <div class="user-account-settings-inputs max-input-width popup-row">
             <div class="input-stack parking-info-text">
                 <div class="input-stack">
                     <div><b>Reserved till:</b> 16:30 (20.09.2023)</div>
-                    <div><b>Price:</b> €3.20/h</div>
+                    <div id="popup-price"><b>Price:</b> €3.20/h</div>
                 </div>
                 <button class="btn btn-secondary"
                     style="background-color: rgb(var(--danger-color)); color: white;">Cancel</button>
@@ -221,12 +224,12 @@ error_reporting(E_ALL);
                             if (!empty($_SESSION['reservation_list'])) {
                                 foreach ($_SESSION['reservation_list'] as $reservation) {
                                     echo '<div class="parking-space">';
-                                    echo '<div class="parking-space-info">';
-                                    echo '<h3><b>' . $reservation['address'] . '</b></h3>';
+                                    echo '<div class="parking-space-info-'.$list_id.'">';
+                                    echo '<h3 id="parking-space-info-'.$list_id.'-address"><b>' . $reservation['address'] . '</b></h3>';
                                     echo '<div class="parking-space-info-details">';
                                     echo '<div>';
                                     echo '<b>Price</b>';
-                                    echo '<p>' . $reservation['price'] . '</p>';
+                                    echo '<p id="parking-space-info-'.$list_id.'-price">' . $reservation['price'] . '</p>';
                                     echo '</div>';
                                     echo '<div>';
                                     echo '<b style="display: none;">Rating</b>';
@@ -234,8 +237,9 @@ error_reporting(E_ALL);
                                     echo '</div>';
                                     echo '</div>';
                                     echo '</div>';
-                                    echo '<button class="btn btn-primary" onclick="openPopup(\'popup-parking-info\')">View Parking Space</button>';
+                                    echo '<button class="btn btn-primary" onclick="openDetailedPopup(\'popup-parking-info\', \'parking-space-info-'.$list_id.'\')">View Parking Space</button>';
                                     echo '</div>';
+                                    $list_id++;
                                 }
                             }
                         }
@@ -256,11 +260,11 @@ error_reporting(E_ALL);
                                 foreach ($_SESSION['favorites_list'] as $favorite) {
                                     echo '<div class="parking-space">';
                                     echo '<div class="parking-space-info">';
-                                    echo '<h3><b>' . $favorite['address'] . '</b></h3>';
+                                    echo '<h3 id="parking-space-info-'.$list_id.'-address"><b>' . $favorite['address'] . '</b></h3>';
                                     echo '<div class="parking-space-info-details">';
                                     echo '<div>';
                                     echo '<b>Price</b>';
-                                    echo '<p>' . $favorite['price'] . '</p>';
+                                    echo '<p id="parking-space-info-'.$list_id.'-price">' . $favorite['price'] . '</p>';
                                     echo '</div>';
                                     echo '<div>';
                                     echo '<b style="display: none;">Rating</b>';
@@ -270,10 +274,10 @@ error_reporting(E_ALL);
                                     echo '</div>';
                                     echo '<div class="parking-fav-buttons">';
                                     echo '<button class="btn btn-secondary">Remove favorite</button>';
-                                    echo '<button class="btn btn-primary" onclick="openPopup(\'popup-parking-info\')">View Parking
-                                    Space</button>';
+                                    echo '<button class="btn btn-primary" onclick="openDetailedPopup(\'popup-parking-info\', \'parking-space-info-'.$list_id.'\')">View Parking Space</button>';
                                     echo '</div>';
                                     echo '</div>';
+                                    $list_id++;
                                 }
                             }
                         }

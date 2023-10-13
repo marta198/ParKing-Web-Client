@@ -25,6 +25,22 @@ function closePopup() {
     mainBodyObj.classList.remove('popup-blur');
 }
 
+function openDetailedPopup(popup, getPopupObj) {
+    popupObj = popup;
+    document.getElementById(popupObj).classList.remove('hide');
+    popupBackgroundObj.classList.remove('hide');
+    mainBodyObj.classList.add('popup-blur');
+    console.log(getPopupObj + '-address');
+    const address = document.getElementById(getPopupObj + '-address').innerText;
+    const price = document.getElementById(getPopupObj + '-price').innerText;
+
+    const gmap_canvas = document.getElementById('gmap_canvas');
+    gmap_canvas.src = "https://maps.google.com/maps?q=" + address + "&t=&z=13&ie=UTF8&iwloc=&output=embed";
+
+    document.getElementById('popup-address').innerText = address;
+    document.getElementById('popup-price').innerText = price;
+}
+
 function openPopup(popup) {
     popupObj = popup;
     document.getElementById(popupObj).classList.remove('hide');
