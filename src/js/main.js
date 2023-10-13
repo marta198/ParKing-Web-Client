@@ -48,14 +48,14 @@ function openPopup(popup) {
     mainBodyObj.classList.add('popup-blur');
 }
 
-function toggleDropdownContent() {
+/*function toggleDropdownContent() {
     var dropdownContent = document.getElementById('quick-report-dropdown');
     if (dropdownContent.style.display === 'block') {
         dropdownContent.style.display = 'none';
     } else {
         dropdownContent.style.display = 'block';
     }
-}
+}*/
 
 function selectQuickReport(item) {
     var selectedItem = item.textContent;

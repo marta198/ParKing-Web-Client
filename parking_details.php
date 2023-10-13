@@ -134,7 +134,7 @@
             <label style="text-align: center;">Select for how long you are going to stay there.</label>
             <div class="input-stack payment-slider">
                 <input type="range" min="0.5" max="48" class="slider" id="payment-hours" value="0.5" step="0.5" oninput="updateSliderValue(this.value)">
-                <h2 id="payment-hours-value">1h | €0.5</h2>
+                <h2 id="payment-hours-value">0.5h | €0.25</h2>
             </div>
             <div class="user-account-update">
                 <button class="btn btn-primary">Pay</button>
@@ -153,7 +153,7 @@
         <div class="user-account-settings-inputs max-input-width">
             <label>Quick report</label>
             <div class="dropdown">
-                <span class="dropdown-toggle" id="quick-report-dropdown-btn" onclick="toggleDropdownContent()">Select
+                <span class="dropdown-toggle" id="quick-report-dropdown-btn-span" onclick="toggleDropdownContent()">Select
                     Quick Report</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
                     <path d="M7 10l5 5 5-5z" />
@@ -162,8 +162,7 @@
                     <button class="dropdown-item" onclick="selectQuickReport(this)">Parking space taken</button>
                     <button class="dropdown-item" onclick="selectQuickReport(this)">Wrong parking price</button>
                     <button class="dropdown-item" onclick="selectQuickReport(this)">Construction</button>
-                    <button class="dropdown-item" onclick="selectQuickReport(this)">Broken / missing parking
-                        meter</button>
+                    <button class="dropdown-item" onclick="selectQuickReport(this)">Broken / missing parking meter</button>
                     <button class="dropdown-item" onclick="selectQuickReport(this)">Lack of signage</button>
                     <button class="dropdown-item" onclick="selectQuickReport(this)">Poor lighting</button>
                     <button class="dropdown-item" onclick="selectQuickReport(this)">Safety concerns</button>
