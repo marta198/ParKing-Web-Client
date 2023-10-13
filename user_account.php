@@ -28,7 +28,20 @@ error_reporting(E_ALL);
                 <div class="header-links-clickable">
                     <a href="index.php" class="link">Homepage</a>
                     <a href="parking_list.php" class="link">Parking List</a>
-                    <button class="btn btn-primary" onclick="window.location.href='login.php'">My Parking</button>
+                    <button class="btn btn-primary" onclick="window.location.href='login.php'">
+                        <?php
+                        if (!isset($_SESSION)) {
+                            session_start();
+                        }
+
+                        if (!isset($_SESSION['username'])) {
+                            echo "My Parking";
+                        } else {
+                            echo $_SESSION['username'];
+                        }
+
+                        ?>
+                    </button>
                 </div>
                 <div>
                     <svg id="light-theme-toggle" class="theme-change" xmlns="http://www.w3.org/2000/svg" width="32"

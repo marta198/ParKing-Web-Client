@@ -18,8 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt->execute();
     $_SESSION['user_id'] = $stmt->fetchColumn(0);
     if ($stmt->rowCount() > 0) {
-        // Username and password match the result
-// Redirect to the dashboard page
         header("Location: ../../user_account.php");
     } else {
         // Username and password do not match the result
