@@ -18,7 +18,9 @@ return array(
 ```
 
 # To do
-- [ ] REFACTOR ALL DB VARs
+- [X] REFACTOR ALL DB VARs
+# Login
+- [ ] Retain session between logins
 # User profile
 - [X] Use data from database:
     - [ ] Profile picture
@@ -33,6 +35,7 @@ return array(
     - [ ] View parking space (view reservation!)
     - [X] Load favorites
     - [ ] View favorites (show infopage from parking list)
+    - [ ] Make invisible data to load into pop-ups
 
 ## Clicking on "View Parking Space"
 - [ ] Add functionality to cancel reservation.
