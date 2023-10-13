@@ -103,3 +103,9 @@ function checkScreenSize() {
 }
 checkScreenSize();
 window.matchMedia("(min-width: 920px)").addEventListener("change", checkScreenSize);
+
+//slider
+function updateSliderValue(value) {
+    const displayValue = `${value}h | €${(value * 0.5).toFixed(2)}`;
+    document.getElementById("payment-hours-value").textContent = displayValue;
+}

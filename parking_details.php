@@ -133,8 +133,7 @@
         <div class="user-account-settings-inputs max-input-width">
             <label style="text-align: center;">Select for how long you are going to stay there.</label>
             <div class="input-stack payment-slider">
-                <input type="range" min="1" max="48" class="slider" id="payment-hours" value="1"
-                    oninput="updateSliderValue(this.value)">
+                <input type="range" min="0.5" max="48" class="slider" id="payment-hours" value="0.5" step="0.5" oninput="updateSliderValue(this.value)">
                 <h2 id="payment-hours-value">1h | €0.5</h2>
             </div>
             <div class="user-account-update">
