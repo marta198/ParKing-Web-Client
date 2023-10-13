@@ -139,7 +139,7 @@
                                 </b></h3>
                             <div class="parking-item-info">
                                 <p><b>Price:</b>
-                                    <?php echo $row["price"] > 0 ? (sprintf("%.2f", $row["price"]) . "€") : "Free"; ?>
+                                    <?php echo $row["price"] > 0 ? (sprintf("%.2f", $row["price"]) . "€ / h") : "Free"; ?>
                                 </p>
                                 <p><b>Spaces:</b>
                                     <?php echo ($row["max_spots"] - $row["spots_taken"]); ?>
