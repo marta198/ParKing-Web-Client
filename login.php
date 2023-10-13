@@ -13,6 +13,17 @@
     <link rel="manifest" href="src/img/favicon/site.webmanifest">
 </head>
 
+<?php
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+if (isset($_SESSION['username'])) {
+    header("Location: user_account.php");
+}
+?>
+
 <body>
     <header class="header-container" id="header">
         <div class="header">
