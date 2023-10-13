@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Oct 12, 2023 at 08:34 PM
--- Server version: 10.5.20-MariaDB
--- PHP Version: 7.3.33
+-- Host: 127.0.0.1
+-- Generation Time: Oct 13, 2023 at 12:42 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `id21373649_web_client`
+-- Database: `web_client_local`
 --
 
 -- --------------------------------------------------------
@@ -369,7 +369,7 @@ CREATE TABLE `review_list` (
 --
 DROP TABLE IF EXISTS `client_data`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`id21373649_webgroup`@`%` SQL SECURITY DEFINER VIEW `client_data`  AS SELECT `client`.`id` AS `clientID`, `client`.`username` AS `username`, `client`.`password` AS `password`, `client`.`email` AS `email`, `client`.`premium_id` AS `premiumID`, `client`.`level` AS `level`, `client`.`xp` AS `XP`, `premium`.`end_date` AS `Premium_ends`, `premium`.`discount` AS `discount` FROM (`client` left join `premium` on(`client`.`premium_id` = `premium`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `client_data`  AS SELECT `client`.`id` AS `clientID`, `client`.`username` AS `username`, `client`.`password` AS `password`, `client`.`email` AS `email`, `premium`.`id` AS `premiumID`, `client`.`level` AS `level`, `client`.`xp` AS `XP`, `premium`.`end_date` AS `Premium_ends`, `premium`.`discount` AS `discount` FROM (`client` left join `premium` on(`client`.`premium_id` = `premium`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -378,7 +378,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`id21373649_webgroup`@`%` SQL SECURITY DEFINE
 --
 DROP TABLE IF EXISTS `favorites_list`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`id21373649_webgroup`@`%` SQL SECURITY DEFINER VIEW `favorites_list`  AS SELECT `client`.`id` AS `clientID`, `client`.`username` AS `username`, `parking`.`id` AS `parkingID`, `parking`.`address` AS `address`, `parking`.`price` AS `price` FROM ((`client` left join `favorite_parking` on(`client`.`id` = `favorite_parking`.`client_id`)) join `parking` on(`favorite_parking`.`parking_id` = `parking`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `favorites_list`  AS SELECT `client`.`id` AS `clientID`, `client`.`username` AS `username`, `parking`.`id` AS `parkingID`, `parking`.`address` AS `address`, `parking`.`price` AS `price` FROM ((`client` left join `favorite_parking` on(`client`.`id` = `favorite_parking`.`client_id`)) join `parking` on(`favorite_parking`.`parking_id` = `parking`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -387,7 +387,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`id21373649_webgroup`@`%` SQL SECURITY DEFINE
 --
 DROP TABLE IF EXISTS `parking_list`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`id21373649_webgroup`@`%` SQL SECURITY DEFINER VIEW `parking_list`  AS SELECT `parking`.`id` AS `id`, `parking`.`address` AS `address`, `partner`.`company_name` AS `company_name`, `parking`.`price` AS `price`, `parking`.`is_premium` AS `is_premium`, `parking`.`max_spots` AS `max_spots`, `parking`.`spots_taken` AS `spots_taken`, `parking`.`start_time` AS `start_time`, `parking`.`end_time` AS `end_time`, `parking`.`is_for_disabled` AS `is_for_disabled` FROM (`parking` left join `partner` on(`parking`.`partner_id` = `partner`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `parking_list`  AS SELECT `parking`.`id` AS `id`, `parking`.`address` AS `address`, `partner`.`company_name` AS `company_name`, `parking`.`price` AS `price`, `parking`.`is_premium` AS `is_premium`, `parking`.`max_spots` AS `max_spots`, `parking`.`spots_taken` AS `spots_taken`, `parking`.`start_time` AS `start_time`, `parking`.`end_time` AS `end_time`, `parking`.`is_for_disabled` AS `is_for_disabled` FROM (`parking` left join `partner` on(`parking`.`partner_id` = `partner`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -396,7 +396,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`id21373649_webgroup`@`%` SQL SECURITY DEFINE
 --
 DROP TABLE IF EXISTS `reservation_list`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`id21373649_webgroup`@`%` SQL SECURITY DEFINER VIEW `reservation_list`  AS SELECT `client`.`id` AS `id`, `client`.`username` AS `username`, `client`.`email` AS `email`, `parking`.`id` AS `parking_id`, `parking`.`start_time` AS `start_time`, `reservation`.`end_time` AS `end_time`, `parking`.`address` AS `address`, `partner`.`company_name` AS `company_name`, `parking`.`price` AS `price` FROM (((`client` left join `reservation` on(`client`.`id` = `reservation`.`client_id`)) left join `parking` on(`reservation`.`parking_id` = `parking`.`id`)) left join `partner` on(`parking`.`partner_id` = `partner`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `reservation_list`  AS SELECT `client`.`id` AS `id`, `client`.`username` AS `username`, `client`.`email` AS `email`, `parking`.`id` AS `parking_id`, `parking`.`start_time` AS `start_time`, `reservation`.`end_time` AS `end_time`, `parking`.`address` AS `address`, `partner`.`company_name` AS `company_name`, `parking`.`price` AS `price` FROM (((`client` left join `reservation` on(`client`.`id` = `reservation`.`client_id`)) left join `parking` on(`reservation`.`parking_id` = `parking`.`id`)) left join `partner` on(`parking`.`partner_id` = `partner`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -405,7 +405,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`id21373649_webgroup`@`%` SQL SECURITY DEFINE
 --
 DROP TABLE IF EXISTS `review_list`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`id21373649_webgroup`@`%` SQL SECURITY DEFINER VIEW `review_list`  AS SELECT `parking`.`id` AS `parkingID`, `review`.`title` AS `title`, `review`.`description` AS `description`, `review`.`rating` AS `rating`, `client`.`username` AS `username` FROM ((`parking` left join `review` on(`parking`.`id` = `review`.`parking_id`)) join `client` on(`review`.`client_id` = `client`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `review_list`  AS SELECT `parking`.`id` AS `parkingID`, `review`.`title` AS `title`, `review`.`description` AS `description`, `review`.`rating` AS `rating`, `client`.`username` AS `username` FROM ((`parking` left join `review` on(`parking`.`id` = `review`.`parking_id`)) join `client` on(`review`.`client_id` = `client`.`id`)) ;
 
 --
 -- Indexes for dumped tables
