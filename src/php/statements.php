@@ -27,3 +27,12 @@
                                         ON parking.partner_id = partner.id 
                                         WHERE parking.id=:id LIMIT 1");
 ?>
+
+<?php $getReviewListForParking = $pdo->prepare("SELECT review.id, 
+                                        review.title, 
+                                        review.description, 
+                                        review.rating, 
+                                        review.title 
+                                        FROM `review` 
+                                        WHERE parking_id = :id"); 
+?>
