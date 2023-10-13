@@ -58,6 +58,10 @@
     box-shadow: var(--dropshadow);
 }
 
+.btn-login{
+    text-transform: capitalize;
+}
+
 .link{
     text-decoration: none;
     color: rgb(var(--text-color));

@@ -288,7 +288,9 @@
     .function{
         display: flex;
         flex-direction: column;
-        width: 400px;
+        width: 80%;
+        max-width: 380px;
+        min-width: 260px;
     }
     .feature{
         display: flex;

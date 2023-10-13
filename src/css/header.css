@@ -58,9 +58,36 @@
     display: none;
 }
 
+
+.phone-menu{
+    position: fixed;
+    top: 100px;
+    right: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10px;
+    background-color: rgb(var(--background-color));
+    height: auto;
+    width: 0px;
+    height: 60px;
+    box-shadow: 0px 7px 5px 0px rgba(0,0,0,0.2);
+}
+
+.phone-menu-open{
+    width: 100%;
+}
+
+
 @media only screen and (max-width: 920px) {
     .hide-hamburger{
         display: block;
+        transition: transform 0.2s ease-in-out;
+    }
+    .hide-hamburger:hover{
+        cursor: pointer;
+        transform: scale(1.1);
+        transition: transform 0.2s ease-in-out;
     }
     .header-links-clickable{
         display: none;

@@ -31,7 +31,7 @@ $list_id = 0;
                 <div class="header-links-clickable">
                     <a href="index.php" class="link">Homepage</a>
                     <a href="parking_list.php" class="link">Parking List</a>
-                    <button class="btn btn-primary" onclick="window.location.href='login.php'">
+                    <button class="btn btn-primary btn-login" onclick="window.location.href='login.php'">
                         <?php
                         if (!isset($_SESSION)) {
                             session_start();
@@ -59,11 +59,35 @@ $list_id = 0;
                     </svg>
                 </div>
                 <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="hide-hamburger" width="42" height="42"
+                    <svg xmlns="http://www.w3.org/2000/svg" id="hamburger-menu" class="hide-hamburger" width="42" height="42" onclick="openPhoneMenu()"
                         viewBox="0 0 24 24">
                         <path fill="none" stroke="rgb(var(--primary-color))" stroke-linecap="round"
                             stroke-linejoin="round" stroke-width="2" d="M5 17h14M5 12h14M5 7h14" />
                     </svg>
+                </div>
+                <div class="phone-menu hide" id="phone-menu">
+                    <div>
+                        <a href="index.php" class="link">Homepage</a>
+                    </div>
+                    <div>
+                        <a href="parking_list.php" class="link">Parking List</a>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-login" onclick="window.location.href='login.php'">
+                            <?php
+                            if (!isset($_SESSION)) {
+                                session_start();
+                            }
+
+                            if (!isset($_SESSION['username'])) {
+                                echo "My Parking";
+                            } else {
+                                echo $_SESSION['username'];
+                            }
+
+                            ?>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -185,7 +209,7 @@ $list_id = 0;
             <div class="user-xp-container">
                 <div class="user-xp-bar">
                     <div class="user-xp-bar-fill">
-                        <p class="user-xp-bar-text">XP -
+                        <p class="user-xp-bar-text">
                             <?php echo $_SESSION['xp']; ?>/6000
                         </p>
                     </div>
@@ -229,7 +253,7 @@ $list_id = 0;
                                     echo '<div class="parking-space-info-details">';
                                     echo '<div>';
                                     echo '<b>Price</b>';
-                                    echo '<p id="parking-space-info-'.$list_id.'-price">' . $reservation['price'] . '€ / h</p>';
+                                    echo '<p id="parking-space-info-'.$list_id.'-price">' . $reservation['price'] . '€/h</p>';
                                     echo '</div>';
                                     echo '<div>';
                                     echo '<b style="display: none;">Rating</b>';
@@ -264,7 +288,7 @@ $list_id = 0;
                                     echo '<div class="parking-space-info-details">';
                                     echo '<div>';
                                     echo '<b>Price</b>';
-                                    echo '<p id="parking-space-info-'.$list_id.'-price">' . $favorite['price'] . '€ / h</p>';
+                                    echo '<p id="parking-space-info-'.$list_id.'-price">' . $favorite['price'] . '€/h</p>';
                                     echo '</div>';
                                     echo '<div>';
                                     echo '<b style="display: none;">Rating</b>';

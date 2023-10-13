@@ -23,7 +23,20 @@
                 <div class="header-links-clickable">
                     <a href="index.php" class="link">Homepage</a>
                     <a href="parking_list.php" class="link">Parking List</a>
-                    <button class="btn btn-primary" onclick="window.location.href='login.php'">My Parking</button>
+                    <button class="btn btn-primary btn-login" onclick="window.location.href='login.php'">
+                        <?php
+                        if (!isset($_SESSION)) {
+                            session_start();
+                        }
+
+                        if (!isset($_SESSION['username'])) {
+                            echo "My Parking";
+                        } else {
+                            echo $_SESSION['username'];
+                        }
+
+                        ?>
+                    </button>
                 </div>
                 <div>
                     <svg id="light-theme-toggle" class="theme-change" xmlns="http://www.w3.org/2000/svg" width="32"
@@ -38,11 +51,35 @@
                     </svg>
                 </div>
                 <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="hide-hamburger" width="42" height="42"
+                    <svg xmlns="http://www.w3.org/2000/svg" id="hamburger-menu" class="hide-hamburger" width="42" height="42" onclick="openPhoneMenu()"
                         viewBox="0 0 24 24">
                         <path fill="none" stroke="rgb(var(--primary-color))" stroke-linecap="round"
                             stroke-linejoin="round" stroke-width="2" d="M5 17h14M5 12h14M5 7h14" />
                     </svg>
+                </div>
+                <div class="phone-menu hide" id="phone-menu">
+                    <div>
+                        <a href="index.php" class="link">Homepage</a>
+                    </div>
+                    <div>
+                        <a href="parking_list.php" class="link">Parking List</a>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-login" onclick="window.location.href='login.php'">
+                            <?php
+                            if (!isset($_SESSION)) {
+                                session_start();
+                            }
+
+                            if (!isset($_SESSION['username'])) {
+                                echo "My Parking";
+                            } else {
+                                echo $_SESSION['username'];
+                            }
+
+                            ?>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -147,37 +184,6 @@
         </div>
     </div>
     <div class="popup-background hide" id="popup-background" onclick="closePopup()"></div>
-
-    <script>
-        function toggleDropdownContent() {
-            var dropdownContent = document.getElementById('quick-report-dropdown');
-            if (dropdownContent.style.display === 'block') {
-                dropdownContent.style.display = 'none';
-            } else {
-                dropdownContent.style.display = 'block';
-            }
-        }
-
-        function selectQuickReport(item) {
-            var selectedItem = item.textContent;
-            document.getElementById('quick-report-dropdown-btn').textContent = selectedItem;
-            closeDropdown();
-        }
-
-        function closeDropdown() {
-            var dropdownContent = document.getElementById('quick-report-dropdown');
-            dropdownContent.style.display = 'none';
-        }
-
-        function closePopup() {
-            var popup = document.getElementById('popup-write-report');
-            var popupBackground = document.getElementById('popup-background');
-            popup.classList.add('hide');
-            popupBackground.classList.add('hide');
-        }
-    </script>
-
-
     <!-- Write review popup -->
     <div class="popup dropshadow hide" id="popup-write-review">
         <svg class="close-popup" onclick="closePopup()" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
@@ -273,12 +279,12 @@
             <div class="parking-details-container">
                 <div class="details-title">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                        class="favorite-star">
+                        class="favorite-star" id="favorite-star-empty" onclick="toggleFavoriteStar()">
                         <path fill="rgb(var(--star-yellow))"
                             d="M9.6 16.65L12 14.8l2.4 1.85l-.9-3.05l2.25-1.6h-2.8L12 8.9l-.95 3.1h-2.8l2.25 1.6l-.9 3.05Zm2.4.65l-3.7 2.825q-.275.225-.6.213t-.575-.188q-.25-.175-.387-.475t-.013-.65L8.15 14.4l-3.625-2.575q-.3-.2-.375-.525t.025-.6q.1-.275.35-.488t.6-.212H9.6l1.45-4.8q.125-.35.388-.538T12 4.475q.3 0 .563.188t.387.537L14.4 10h4.475q.35 0 .6.213t.35.487q.1.275.025.6t-.375.525L15.85 14.4l1.425 4.625q.125.35-.012.65t-.388.475q-.25.175-.575.188t-.6-.213L12 17.3Zm0-4.525Z" />
                     </svg>
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                        class="favorite-star hide">
+                        class="favorite-star hide" id="favorite-star-full" onclick="toggleFavoriteStar()">
                         <path fill="rgb(var(--star-yellow))"
                             d="m12 17.3l-3.7 2.825q-.275.225-.6.213t-.575-.188q-.25-.175-.387-.475t-.013-.65L8.15 14.4l-3.625-2.575q-.3-.2-.375-.525t.025-.6q.1-.275.35-.488t.6-.212H9.6l1.45-4.8q.125-.35.388-.538T12 4.475q.3 0 .563.188t.387.537L14.4 10h4.475q.35 0 .6.213t.35.487q.1.275.025.6t-.375.525L15.85 14.4l1.425 4.625q.125.35-.012.65t-.388.475q-.25.175-.575.188t-.6-.213L12 17.3Z" />
                     </svg>
@@ -319,8 +325,7 @@
                             foreach ($resultReviewList as $review) {
                                 ?>
                                 <div class="details-info-text">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                                        class="review-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"class="review-star">
                                         <path fill="rgb(var(--star-yellow))"
                                             d="m12 17.3l-3.7 2.825q-.275.225-.6.213t-.575-.188q-.25-.175-.387-.475t-.013-.65L8.15 14.4l-3.625-2.575q-.3-.2-.375-.525t.025-.6q.1-.275.35-.488t.6-.212H9.6l1.45-4.8q.125-.35.388-.538T12 4.475q.3 0 .563.188t.387.537L14.4 10h4.475q.35 0 .6.213t.35.487q.1.275.025.6t-.375.525L15.85 14.4l1.425 4.625q.125.35-.012.65t-.388.475q-.25.175-.575.188t-.6-.213L12 17.3Z" />
                                     </svg>

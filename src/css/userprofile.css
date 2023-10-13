@@ -4,7 +4,7 @@
     align-items: center;
     flex-direction: column;
     gap: 20px;
-    margin: 0 50px;
+    margin: 0 20px;
     margin-top: 150px;
     margin-bottom: 30px;
 }
@@ -16,7 +16,7 @@
     flex-wrap: wrap;
     gap: 20px;
     border-radius: 10px;
-    width: fit-content;
+    max-width: 1200px;
 }
 
 .user-current-lvl{
@@ -28,22 +28,22 @@
 
 .user-info-container{
     display: flex;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 1fr;
+    flex-direction: column;
     align-items: stretch;
     gap: 20px;
+    max-width: 1200px;
+    width: 100%;
 }
 
 .user-xp-container{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     flex-direction: column;
     gap: 20px;
     background-color: rgb(var(--secondary-color));
     border-radius: 10px;
     padding: 20px;
-    min-width: 360px;
 }
 
 .user-xp-bar{
@@ -77,7 +77,7 @@
     gap: 10px;
     font-size: 20px;
     font-weight: 600;
-    color: rgb(var(--text-color));
+    color: white;
     mix-blend-mode: overlay;
 }
 
@@ -93,7 +93,6 @@
     flex-direction: column;
     gap: 20px;
     width: 100%;
-    min-width: 400px;
 }
 
 .current-plan{
@@ -267,7 +266,6 @@
         align-items: stretch;
         gap: 20px;
         width: 100%;
-        min-width: 400px;
     }
 
     .user-info-right{
@@ -282,6 +280,11 @@
 
     .parking-fav-buttons{
         flex-direction: column;
+    }
+}
+@media screen and (max-width: 810px) {
+    .user-xp-container{
+        width: 100%;
     }
 }
 
@@ -303,5 +306,18 @@
         flex-direction: column;
         gap: 10px;
         margin: 15px 0;
+    }
+
+    .parking-space{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: rgb(var(--background-color));
+    }
+    .current-plan{
+        flex-direction: column;
     }
 }

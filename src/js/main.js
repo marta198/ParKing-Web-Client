@@ -47,3 +47,59 @@ function openPopup(popup) {
     popupBackgroundObj.classList.remove('hide');
     mainBodyObj.classList.add('popup-blur');
 }
+
+function toggleDropdownContent() {
+    var dropdownContent = document.getElementById('quick-report-dropdown');
+    if (dropdownContent.style.display === 'block') {
+        dropdownContent.style.display = 'none';
+    } else {
+        dropdownContent.style.display = 'block';
+    }
+}
+
+function selectQuickReport(item) {
+    var selectedItem = item.textContent;
+    document.getElementById('quick-report-dropdown-btn').textContent = selectedItem;
+    closeDropdown();
+}
+
+function closeDropdown() {
+    var dropdownContent = document.getElementById('quick-report-dropdown');
+    dropdownContent.style.display = 'none';
+}
+
+//Toggle favorite star on in parking details
+function toggleFavoriteStar() {
+    var emptyStar = document.getElementById('favorite-star-empty');
+    var fullStar = document.getElementById('favorite-star-full');
+    if (emptyStar.classList.contains('hide')) {
+        emptyStar.classList.remove('hide');
+        fullStar.classList.add('hide');
+    } else {
+        emptyStar.classList.add('hide');
+        fullStar.classList.remove('hide');
+    }
+}
+
+//when id hamburger-menu is clicked, remove hide from phone-menu and set add class phone-menu-open, make it togglable
+function openPhoneMenu() {
+    var phoneMenu = document.getElementById('phone-menu');
+    if (phoneMenu.classList.contains('hide')) {
+        phoneMenu.classList.remove('hide');
+        phoneMenu.classList.add('phone-menu-open');
+    } else {
+        phoneMenu.classList.add('hide');
+        phoneMenu.classList.remove('phone-menu-open');
+    }
+}
+
+//auto detect user screen size
+function checkScreenSize() {
+    if (window.matchMedia("(min-width: 920px)").matches) {
+        var phoneMenu = document.getElementById('phone-menu');
+        phoneMenu.classList.add('hide');
+        phoneMenu.classList.remove('phone-menu-open');
+    }
+}
+checkScreenSize();
+window.matchMedia("(min-width: 920px)").addEventListener("change", checkScreenSize);
