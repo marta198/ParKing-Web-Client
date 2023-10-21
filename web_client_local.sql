@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2023 at 12:42 PM
+-- Generation Time: Oct 21, 2023 at 02:41 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -32,6 +32,7 @@ CREATE TABLE `client` (
   `username` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
   `premium_id` bigint(20) DEFAULT NULL,
   `level` int(11) NOT NULL,
   `xp` int(11) NOT NULL
@@ -41,17 +42,17 @@ CREATE TABLE `client` (
 -- Dumping data for table `client`
 --
 
-INSERT INTO `client` (`id`, `username`, `password`, `email`, `premium_id`, `level`, `xp`) VALUES
-(1, 'user', 'user', 'user@user.com', NULL, 1, 20),
-(2, 'user2', 'user2', 'user2@user.com', 1, 5, 250),
-(3, 'user3', 'user3', 'user3@user.com', NULL, 16, 1200),
-(4, 'user4', 'user4', 'user4@user.com', 2, 2, 150),
-(5, 'user5', 'user5', 'user5@user.com', 3, 12, 1000),
-(6, 'user6', 'user6', 'user6@user.com', 4, 19, 3000),
-(7, 'user7', 'user7', 'user7@user.com', NULL, 1, 20),
-(8, 'user8', 'user8', 'user8@user.com', NULL, 8, 800),
-(9, 'user9', 'user9', 'user9@user.com', NULL, 3, 175),
-(10, 'user10', 'user10', 'user10@user.com', 5, 10, 950);
+INSERT INTO `client` (`id`, `username`, `password`, `email`, `image`, `premium_id`, `level`, `xp`) VALUES
+(1, 'user', 'user', 'user@user.com', 'https://i.ibb.co/7NMy1pv/profile1.jpg', NULL, 1, 20),
+(2, 'user2', 'user2', 'user2@user.com', 'https://i.ibb.co/rGf9P3C/profile2.jpg', 1, 5, 250),
+(3, 'user3', 'user3', 'user3@user.com', 'https://i.ibb.co/tBHFxCZ/profile3.jpg', NULL, 16, 1200),
+(4, 'user4', 'user4', 'user4@user.com', 'https://i.ibb.co/WHGTMTX/profile4.jpg', 2, 2, 150),
+(5, 'user5', 'user5', 'user5@user.com', 'https://i.ibb.co/fDYhLX9/profile5.jpg', 3, 12, 1000),
+(6, 'user6', 'user6', 'user6@user.com', 'https://i.ibb.co/0J3MLqM/profile6.jpg', 4, 19, 3000),
+(7, 'user7', 'user7', 'user7@user.com', 'https://i.ibb.co/Jz0cR1V/profile7.jpg', NULL, 1, 20),
+(8, 'user8', 'user8', 'user8@user.com', 'https://i.ibb.co/B30M3nw/profile8.jpg', NULL, 8, 800),
+(9, 'user9', 'user9', 'user9@user.com', 'https://i.ibb.co/wQsS2wN/profile9.jpg', NULL, 3, 175),
+(10, 'user10', 'user10', 'user10@user.com', 'https://i.ibb.co/9Y68Hq3/profile10.jpg', 5, 10, 950);
 
 -- --------------------------------------------------------
 
@@ -64,6 +65,7 @@ CREATE TABLE `client_data` (
 ,`username` varchar(45)
 ,`password` varchar(45)
 ,`email` varchar(45)
+,`image` varchar(255)
 ,`premiumID` bigint(20)
 ,`level` int(11)
 ,`XP` int(11)
@@ -369,7 +371,7 @@ CREATE TABLE `review_list` (
 --
 DROP TABLE IF EXISTS `client_data`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `client_data`  AS SELECT `client`.`id` AS `clientID`, `client`.`username` AS `username`, `client`.`password` AS `password`, `client`.`email` AS `email`, `premium`.`id` AS `premiumID`, `client`.`level` AS `level`, `client`.`xp` AS `XP`, `premium`.`end_date` AS `Premium_ends`, `premium`.`discount` AS `discount` FROM (`client` left join `premium` on(`client`.`premium_id` = `premium`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `client_data`  AS SELECT `client`.`id` AS `clientID`, `client`.`username` AS `username`, `client`.`password` AS `password`, `client`.`email` AS `email`, `client`.`image` AS `image`, `premium`.`id` AS `premiumID`, `client`.`level` AS `level`, `client`.`xp` AS `XP`, `premium`.`end_date` AS `Premium_ends`, `premium`.`discount` AS `discount` FROM (`client` left join `premium` on(`client`.`premium_id` = `premium`.`id`)) ;
 
 -- --------------------------------------------------------
 
