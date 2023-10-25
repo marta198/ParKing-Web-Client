@@ -1,3 +1,10 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
+
+
 <?php include("src/php/db.php") ?>
 <?php include("src/php/statements.php") ?>
 <!DOCTYPE html>
@@ -25,9 +32,6 @@
                     <a href="parking_list.php" class="link">Parking List</a>
                     <button class="btn btn-primary btn-login" onclick="window.location.href='login.php'">
                         <?php
-                        if (!isset($_SESSION)) {
-                            session_start();
-                        }
 
                         if (!isset($_SESSION['username'])) {
                             echo "My Parking";

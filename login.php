@@ -1,3 +1,13 @@
+<?php
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+if (isset($_SESSION['username'])) {
+    header("Location: user_account.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,17 +22,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="src/img/favicon/favicon-16x16.png">
     <link rel="manifest" href="src/img/favicon/site.webmanifest">
 </head>
-
-<?php
-
-if (!isset($_SESSION)) {
-    session_start();
-}
-
-if (isset($_SESSION['username'])) {
-    header("Location: user_account.php");
-}
-?>
 
 <body>
     <header class="header-container" id="header">
