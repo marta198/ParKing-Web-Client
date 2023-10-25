@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 session_start();
 require('./src/php/loadProfile.php');
@@ -11,6 +9,8 @@ require('./src/php/loadProfile.php');
 $list_id = 0;
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>ParKing</title>
     <meta charset="UTF-8">
