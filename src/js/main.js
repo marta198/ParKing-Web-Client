@@ -109,3 +109,17 @@ function updateSliderValue(value) {
     const displayValue = `${value}h | €${(value * 0.5).toFixed(2)}`;
     document.getElementById("payment-hours-value").textContent = displayValue;
 }
+
+//load a preview of the new profile image
+function loadFile(image) {
+    console.log(image.files[0]);
+    var output = document.getElementById('user-pfp-settings');
+    output.style.backgroundImage = "url(" + URL.createObjectURL(image.files[0]) + ")";
+}
+
+//reset back to default iamge after closing the settings popup
+function loadOldImage() {
+    var oldImage = document.getElementById('user-pfp');
+    var output = document.getElementById('user-pfp-settings');
+    output.style.backgroundImage = oldImage.style.backgroundImage;
+}
