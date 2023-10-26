@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2023 at 08:16 PM
+-- Generation Time: Oct 26, 2023 at 10:41 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -32,8 +32,8 @@ CREATE TABLE `client` (
   `username` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `level` int(11) NOT NULL,
-  `xp` int(11) NOT NULL
+  `level` int(11) DEFAULT NULL,
+  `xp` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_latvian_ci;
 
 --
@@ -141,13 +141,13 @@ CREATE TABLE `parking` (
   `id` bigint(20) NOT NULL,
   `address` varchar(90) NOT NULL,
   `price` double NOT NULL,
-  `is_premium` tinyint(1) NOT NULL,
-  `partner_id` bigint(20) NOT NULL,
+  `is_premium` tinyint(1) NOT NULL DEFAULT 0,
+  `partner_id` bigint(20) DEFAULT NULL,
   `max_spots_count` int(11) NOT NULL,
   `spots_taken` int(11) NOT NULL,
   `start_time` datetime NOT NULL,
   `end_time` datetime NOT NULL,
-  `is_disabled` tinyint(1) NOT NULL
+  `is_disabled` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_latvian_ci;
 
 --
@@ -462,6 +462,46 @@ ALTER TABLE `review`
   ADD KEY `parking_id` (`parking_id`);
 
 --
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `client`
+--
+ALTER TABLE `client`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `parking`
+--
+ALTER TABLE `parking`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `partner`
+--
+ALTER TABLE `partner`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `premium`
+--
+ALTER TABLE `premium`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `reservation`
+--
+ALTER TABLE `reservation`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `review`
+--
+ALTER TABLE `review`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -469,8 +509,8 @@ ALTER TABLE `review`
 -- Constraints for table `favorite_parking`
 --
 ALTER TABLE `favorite_parking`
-  ADD CONSTRAINT `favorite_parking_ibfk_1` FOREIGN KEY (`parking_id`) REFERENCES `parking` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `favorite_parking_ibfk_2` FOREIGN KEY (`client_id`) REFERENCES `client` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `favorite_parking_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `client` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `favorite_parking_ibfk_2` FOREIGN KEY (`parking_id`) REFERENCES `parking` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `parking`
@@ -488,8 +528,8 @@ ALTER TABLE `premium`
 -- Constraints for table `reservation`
 --
 ALTER TABLE `reservation`
-  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`parking_id`) REFERENCES `parking` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`client_id`) REFERENCES `client` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `client` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`parking_id`) REFERENCES `parking` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `review`
