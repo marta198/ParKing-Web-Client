@@ -85,15 +85,19 @@ function closeDropdown() {
     dropdownContent.style.display = 'none';
 }
 
+//Toggle review stars
 function toggleStarReview(starNumber) {
-    var emptyStar = document.getElementById('favorite-star-empty-' + starNumber);
-    var fullStar = document.getElementById('favorite-star-full-' + starNumber);
-    if (emptyStar.classList.contains('hide')) {
-        emptyStar.classList.remove('hide');
-        fullStar.classList.add('hide');
-    } else {
-        emptyStar.classList.add('hide');
-        fullStar.classList.remove('hide');
+    for (var i = 1; i <= 5; i++) {
+        var emptyStar = document.getElementById('favorite-star-empty-' + i);
+        var fullStar = document.getElementById('favorite-star-full-' + i);
+
+        if (i <= starNumber) {
+            emptyStar.classList.add('hide');
+            fullStar.classList.remove('hide');
+        } else {
+            emptyStar.classList.remove('hide');
+            fullStar.classList.add('hide');
+        }
     }
 }
 
