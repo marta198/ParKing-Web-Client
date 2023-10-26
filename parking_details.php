@@ -77,7 +77,7 @@ if (!isset($_SESSION)) {
                 <h2 id="payment-hours-value">0.5h | €0.25</h2>
             </div>
             <div class="user-account-update">
-                <button class="btn btn-primary">Pay</button>
+                <button class="btn btn-primary" onclick="makeReservation()" >Pay</button>
             </div>
         </div>
     </div>

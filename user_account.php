@@ -153,7 +153,7 @@ $list_id = 0;
                     <div><b>Reserved till:</b> 16:30 (20.09.2023)</div>
                     <div id="popup-price"><b>Price:</b> €3.20/h</div>
                 </div>
-                <button class="btn btn-secondary" style="background-color: rgb(var(--danger-color)); color: white;">Cancel</button>
+                <button class="btn btn-secondary" style="background-color: rgb(var(--danger-color)); color: white;"  onclick="cancelReservation()">Cancel</button>
             </div>
             <div class="mapouter">
                 <iframe class="gmap_canvas" width="200" height="200" id="gmap_canvas" src="https://maps.google.com/maps?q=Slokas%20iela%2028&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
@@ -231,7 +231,7 @@ $list_id = 0;
                             if (!empty($_SESSION['reservation_list'])) {
                                 foreach ($_SESSION['reservation_list'] as $reservation) {
                                     echo '<div class="parking-space">';
-                                    echo '<div class="parking-space-info-' . $list_id . '">';
+                                    echo '<div class="parking-space-info-' . $list_id . '"  parkingID='.$reservation["parking_id"].'>';
                                     echo '<h3 id="parking-space-info-' . $list_id . '-address"><b>' . $reservation['address'] . '</b></h3>';
                                     echo '<div class="parking-space-info-details">';
                                     echo '<div>';
@@ -298,18 +298,17 @@ $list_id = 0;
 </body>
 <script src="src/js/main.js"></script>
 <?php
-if (isset($_GET['updateSuccess'])) {
+if (isset($_GET['updateSuccess'])){
     echo '<script>setTimeout(function(){alert("Information updated.")}, 100);</script>';
 }
-if (isset($_GET['usernameExists'])) {
+if (isset($_GET['usernameExists'])){
     echo '<script>setTimeout(function(){alert("Username already exists.")}, 100);</script>';
 }
-if (isset($_GET['emailExists'])) {
+if (isset($_GET['emailExists'])){
     echo '<script>setTimeout(function(){alert("Email already exists.")}, 100);</script>';
 }
-if (isset($_GET['passwordsDoNotMatch'])) {
+if (isset($_GET['passwordsDoNotMatch'])){
     echo '<script>setTimeout(function(){alert("Passwords do not match.")}, 100);</script>';
 }
 ?>
-
 </html>

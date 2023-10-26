@@ -21,6 +21,7 @@ let popupObj = null;
 //For closing and opening popups
 function closePopup() {
     document.getElementById(popupObj).classList.add('hide');
+    document.getElementById(popupObj).removeAttribute("parkingid");
     popupBackgroundObj.classList.add('hide');
     mainBodyObj.classList.remove('popup-blur');
 }
@@ -30,7 +31,7 @@ function openDetailedPopup(popup, getPopupObj) {
     document.getElementById(popupObj).classList.remove('hide');
     popupBackgroundObj.classList.remove('hide');
     mainBodyObj.classList.add('popup-blur');
-    console.log(getPopupObj + '-address');
+    document.getElementById(popupObj).setAttribute("parkingid", document.getElementsByClassName(getPopupObj)[0].getAttribute("parkingid"));
     const address = document.getElementById(getPopupObj + '-address').innerText;
     const price = document.getElementById(getPopupObj + '-price').innerText;
 
@@ -122,4 +123,26 @@ function loadOldImage() {
     var oldImage = document.getElementById('user-pfp');
     var output = document.getElementById('user-pfp-settings');
     output.style.backgroundImage = oldImage.style.backgroundImage;
+}
+
+
+
+//reservations cancel
+function cancelReservation() {
+    window.location.href = "/src/php/reservation.php?type=cancel&parkingid=" +
+        document.getElementById("popup-parking-info").getAttribute("parkingid") +
+        "&return=" + window.location.pathname;
+}
+
+
+//reservation make
+function makeReservation() {
+    const urlParams = new URLSearchParams(window.location.search);
+    window.location.href = "/src/php/reservation.php?type=make&parkingid="
+        + urlParams.get("id") + "&time="
+        + document.getElementById("payment-hours-value").textContent.split("|")[0].replace("h", "").trim()
+        + "&cost="
+        + document.getElementById("payment-hours-value").textContent.split("|")[1].replace("€", "").trim()
+        + "&return=" + window.location.pathname;
+
 }
