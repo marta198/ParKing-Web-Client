@@ -5,18 +5,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-//https://parking-web.000webhostapp.com/src/php/rest_api.php/client/get
-//https://parking-web.000webhostapp.com/src/php/rest_api.php/client/update
-//https://parking-web.000webhostapp.com/src/php/rest_api.php/parking/get
-//https://parking-web.000webhostapp.com/src/php/rest_api.php/parking/update
-//https://parking-web.000webhostapp.com/src/php/rest_api.php/partner/get
-//https://parking-web.000webhostapp.com/src/php/rest_api.php/partner/update
-//https://parking-web.000webhostapp.com/src/php/rest_api.php/premium/get
-//https://parking-web.000webhostapp.com/src/php/rest_api.php/premium/update
-//https://parking-web.000webhostapp.com/src/php/rest_api.php/reservation/get
-//https://parking-web.000webhostapp.com/src/php/rest_api.php/reservation/update
-//https://parking-web.000webhostapp.com/src/php/rest_api.php/review/get
-//https://parking-web.000webhostapp.com/src/php/rest_api.php/review/update
+//https://parking-web.000webhostapp.com/src/php/rest_api.php/client/get/1
+//https://parking-web.000webhostapp.com/src/php/rest_api.php/client/update/1
+//https://parking-web.000webhostapp.com/src/php/rest_api.php/client/add
+
 
 $request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -78,44 +70,57 @@ if ($table_name) {
             }
         }
     } elseif (strpos($request_uri, 'update') !== false) {
-        $input = json_decode(file_get_contents('php://input'), true);
-        $url_parts = explode('/', $request_uri);
-        $id = end($url_parts); // Get the last part of the URL as the ID
-        
-        // Check if the record with the provided ID already exists
-        $checkQuery = $pdo->prepare("SELECT id FROM $table_name WHERE id = :id");
-        $checkQuery->bindParam(':id', $id, PDO::PARAM_INT);
-        $checkQuery->execute();
-        $recordExists = $checkQuery->fetch(PDO::FETCH_ASSOC);
-        
-        if ($recordExists) {
-            // The record with the provided ID exists, so update it
-            $sql = "UPDATE $table_name SET ";
-            $params = [];
-            foreach ($input as $key => $value) {
-                if ($key !== 'id') { // Exclude the 'id' from the update
-                    $params[] = "$key = :$key";
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $input = json_decode(file_get_contents('php://input'), true);
+            $url_parts = explode('/', $request_uri);
+            $id = end($url_parts); // Get the last part of the URL as the ID
+
+            // Check if the record with the provided ID already exists
+            $checkQuery = $pdo->prepare("SELECT id FROM $table_name WHERE id = :id");
+            $checkQuery->bindParam(':id', $id, PDO::PARAM_INT);
+            $checkQuery->execute();
+            $recordExists = $checkQuery->fetch(PDO::FETCH_ASSOC);
+
+            if ($recordExists) {
+                // The record with the provided ID exists, so update it
+                $sql = "UPDATE $table_name SET ";
+                $params = [];
+                foreach ($input as $key => $value) {
+                    if ($key !== 'id') { // Exclude the 'id' from the update
+                        $params[] = "$key = :$key";
+                    }
                 }
-            }
-            $sql .= implode(', ', $params);
-            $sql .= " WHERE id = :id"; // Update the record with the provided ID
-            $stmt = $pdo->prepare($sql);
-            foreach ($input as $key => $value) {
-                $stmt->bindValue(":$key", $value);
-            }
-            $stmt->bindValue(":id", $id, PDO::PARAM_INT);
-            if ($stmt->execute()) {
-                echo json_encode(array('message' => 'Data updated successfully.'));
+                $sql .= implode(', ', $params);
+                $sql .= " WHERE id = :id"; // Update the record with the provided ID
+                $stmt = $pdo->prepare($sql);
+                foreach ($input as $key => $value) {
+                    $stmt->bindValue(":$key", $value);
+                }
+                $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+                if ($stmt->execute()) {
+                    echo json_encode(array('message' => 'Data updated successfully.'));
+                } else {
+                    echo json_encode(array('message' => 'Error updating data.'));
+                }
             } else {
-                echo json_encode(array('message' => 'Error updating data.'));
+                // The record with the provided ID does not exist, so return an error message
+                echo json_encode(array('message' => 'Error updating data. Record with ID ' . $id . ' does not exist.'));
             }
         } else {
-            // The record with the provided ID does not exist, so return an error message
-            echo json_encode(array('message' => 'Error updating data. Record with ID ' . $id . ' does not exist.'));
+            http_response_code(405);
+            echo json_encode(array('message' => 'Invalid HTTP method'));
         }
     } elseif (strpos($request_uri, 'add') !== false) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $input = json_decode(file_get_contents('php://input'), true);
+
+            // Get the highest ID in the table and increment it by 1
+            $query = $pdo->query("SELECT MAX(id) as max_id FROM $table_name");
+            $max_id = $query->fetch(PDO::FETCH_ASSOC)['max_id'];
+            $new_id = $max_id ? $max_id + 1 : 1;
+
+            // Add the new ID to the input data
+            $input['id'] = $new_id;
 
             $keys = implode(', ', array_keys($input));
             $values = ':' . implode(', :', array_keys($input));
