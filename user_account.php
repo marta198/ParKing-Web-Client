@@ -298,17 +298,18 @@ $list_id = 0;
 </body>
 <script src="src/js/main.js"></script>
 <?php
-if (isset($_GET['updateSuccess'])){
+if (isset($_GET['updateSuccess'])) {
     echo '<script>setTimeout(function(){alert("Information updated.")}, 100);</script>';
 }
-if (isset($_GET['usernameExists'])){
+if (isset($_GET['usernameExists'])) {
     echo '<script>setTimeout(function(){alert("Username already exists.")}, 100);</script>';
 }
-if (isset($_GET['emailExists'])){
+if (isset($_GET['emailExists'])) {
     echo '<script>setTimeout(function(){alert("Email already exists.")}, 100);</script>';
 }
-if (isset($_GET['passwordsDoNotMatch'])){
+if (isset($_GET['passwordsDoNotMatch'])) {
     echo '<script>setTimeout(function(){alert("Passwords do not match.")}, 100);</script>';
 }
 ?>
+
 </html>
