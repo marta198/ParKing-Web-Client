@@ -58,15 +58,43 @@ function openPopup(popup) {
     }
 }*/
 
-function selectQuickReport(item) {
-    var selectedItem = item.textContent;
-    document.getElementById('quick-report-dropdown-btn').textContent = selectedItem;
-    closeDropdown();
+function selectQuickReport(button) {
+    button.style.boxShadow = "0 3px 4px rgba(0, 0, 0, 0.6)";
 }
+    // JavaScript function to handle star rating
+    function handleStarClick(starElement) {
+        const rating = parseInt(starElement.getAttribute('data-rating'));
+
+        // Get the parent element that contains the stars
+        const starsContainer = starElement.parentElement;
+
+        // Loop through all stars in the container and update their appearance
+        const starElements = starsContainer.getElementsByClassName('review-star');
+        for (let i = 0; i < starElements.length; i++) {
+            const currentStar = starElements[i];
+            if (i < rating) {
+                currentStar.classList.remove('hide'); // Show selected stars
+            } else {
+                currentStar.classList.add('hide'); // Hide unselected stars
+            }
+        }
+    }
 
 function closeDropdown() {
     var dropdownContent = document.getElementById('quick-report-dropdown');
     dropdownContent.style.display = 'none';
+}
+
+function toggleStarReview(starNumber) {
+    var emptyStar = document.getElementById('favorite-star-empty-' + starNumber);
+    var fullStar = document.getElementById('favorite-star-full-' + starNumber);
+    if (emptyStar.classList.contains('hide')) {
+        emptyStar.classList.remove('hide');
+        fullStar.classList.add('hide');
+    } else {
+        emptyStar.classList.add('hide');
+        fullStar.classList.remove('hide');
+    }
 }
 
 //Toggle favorite star on in parking details
