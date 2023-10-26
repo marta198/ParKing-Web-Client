@@ -194,3 +194,28 @@ function makeReservation() {
         + "&return=" + window.location.pathname;
 
 }
+
+//remove favorite from user profile
+function removeFavorite(parkingID, userID) {
+    console.log("The parking is ", parkingID, " and the user is ", userID);
+
+    // Make an AJAX request to the server
+    $.ajax({
+        type: 'POST',
+        url: '/src/php/removeFavorite.php',
+        data: {
+            action: 'removeFavorite',
+            parkingID: parkingID, // Include parkingID in the data
+            userID: userID
+        },
+        success: function (response) {
+            console.log('Content from server: ' + response);
+            location.reload();
+        },
+        error: function (xhr, status, error) {
+            console.error('Error loading content from the server.');
+            console.error(xhr.responseText); // This will display the detailed error message.
+
+        }
+    });
+}
