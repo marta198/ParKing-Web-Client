@@ -218,4 +218,13 @@ function removeFavorite(parkingID, userID) {
 
         }
     });
+
+}
+
+
+function checkRegisterData(){
+    if (document.getElementsByClassName("registerPassword")[0].value == document.getElementsByClassName("registerPasswordRepeat")[0].value) {
+        return true;
+    }
+    return false;
 }

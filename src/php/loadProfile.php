@@ -8,6 +8,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+echo $_SESSION['user_id'];
+
 $stmt = "SELECT * FROM client_data WHERE clientID = " . $_SESSION['user_id'];
 $result = $pdo->query($stmt);
 $row = $result->fetch(PDO::FETCH_ASSOC);
