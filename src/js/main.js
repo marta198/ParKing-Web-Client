@@ -79,6 +79,26 @@ function toggleFavoriteStar() {
         emptyStar.classList.add('hide');
         fullStar.classList.remove('hide');
     }
+
+    var urlParams = new URLSearchParams(window.location.search);
+    let parkingID = urlParams.get('id');
+
+    // Make an AJAX request to the server
+    $.ajax({
+        type: 'POST',
+        url: '/src/php/toggle_fav_parking.php',
+        data: {
+            action: 'toggle_fav_parking',
+            parkingID: parkingID // Include parkingID in the data
+        },
+        success: function (response) {
+            console.log('Content from server: ' + response);
+        },
+        error: function () {
+            console.error('Error loading content from the server.');
+        }
+    });
+
 }
 
 //when id hamburger-menu is clicked, remove hide from phone-menu and set add class phone-menu-open, make it togglable

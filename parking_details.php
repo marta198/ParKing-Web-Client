@@ -1,4 +1,6 @@
 <?php
+
+
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -24,6 +26,7 @@ if (!isset($_SESSION)) {
 
 <body>
     <header class="header-container popup-blur" id="header">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <div class="header">
             <img src="src/img/logo.png" alt="ParKing" class="logo">
             <div class="header-links">
@@ -55,8 +58,8 @@ if (!isset($_SESSION)) {
                     </svg>
                 </div>
                 <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" id="hamburger-menu" class="hide-hamburger" width="42" height="42" onclick="openPhoneMenu()"
-                        viewBox="0 0 24 24">
+                    <svg xmlns="http://www.w3.org/2000/svg" id="hamburger-menu" class="hide-hamburger" width="42"
+                        height="42" onclick="openPhoneMenu()" viewBox="0 0 24 24">
                         <path fill="none" stroke="rgb(var(--primary-color))" stroke-linecap="round"
                             stroke-linejoin="round" stroke-width="2" d="M5 17h14M5 12h14M5 7h14" />
                     </svg>
@@ -137,7 +140,8 @@ if (!isset($_SESSION)) {
         <div class="user-account-settings-inputs max-input-width">
             <label style="text-align: center;">Select for how long you are going to stay there.</label>
             <div class="input-stack payment-slider">
-                <input type="range" min="0.5" max="48" class="slider" id="payment-hours" value="0.5" step="0.5" oninput="updateSliderValue(this.value)">
+                <input type="range" min="0.5" max="48" class="slider" id="payment-hours" value="0.5" step="0.5"
+                    oninput="updateSliderValue(this.value)">
                 <h2 id="payment-hours-value">0.5h | €0.25</h2>
             </div>
             <div class="user-account-update">
@@ -157,7 +161,8 @@ if (!isset($_SESSION)) {
         <div class="user-account-settings-inputs max-input-width">
             <label>Quick report</label>
             <div class="dropdown">
-                <span class="dropdown-toggle" id="quick-report-dropdown-btn-span" onclick="toggleDropdownContent()">Select
+                <span class="dropdown-toggle" id="quick-report-dropdown-btn-span"
+                    onclick="toggleDropdownContent()">Select
                     Quick Report</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
                     <path d="M7 10l5 5 5-5z" />
@@ -166,7 +171,8 @@ if (!isset($_SESSION)) {
                     <button class="dropdown-item" onclick="selectQuickReport(this)">Parking space taken</button>
                     <button class="dropdown-item" onclick="selectQuickReport(this)">Wrong parking price</button>
                     <button class="dropdown-item" onclick="selectQuickReport(this)">Construction</button>
-                    <button class="dropdown-item" onclick="selectQuickReport(this)">Broken / missing parking meter</button>
+                    <button class="dropdown-item" onclick="selectQuickReport(this)">Broken / missing parking
+                        meter</button>
                     <button class="dropdown-item" onclick="selectQuickReport(this)">Lack of signage</button>
                     <button class="dropdown-item" onclick="selectQuickReport(this)">Poor lighting</button>
                     <button class="dropdown-item" onclick="selectQuickReport(this)">Safety concerns</button>
@@ -280,16 +286,7 @@ if (!isset($_SESSION)) {
 
             <div class="parking-details-container">
                 <div class="details-title">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                        class="favorite-star" id="favorite-star-empty" onclick="toggleFavoriteStar()">
-                        <path fill="rgb(var(--star-yellow))"
-                            d="M9.6 16.65L12 14.8l2.4 1.85l-.9-3.05l2.25-1.6h-2.8L12 8.9l-.95 3.1h-2.8l2.25 1.6l-.9 3.05Zm2.4.65l-3.7 2.825q-.275.225-.6.213t-.575-.188q-.25-.175-.387-.475t-.013-.65L8.15 14.4l-3.625-2.575q-.3-.2-.375-.525t.025-.6q.1-.275.35-.488t.6-.212H9.6l1.45-4.8q.125-.35.388-.538T12 4.475q.3 0 .563.188t.387.537L14.4 10h4.475q.35 0 .6.213t.35.487q.1.275.025.6t-.375.525L15.85 14.4l1.425 4.625q.125.35-.012.65t-.388.475q-.25.175-.575.188t-.6-.213L12 17.3Zm0-4.525Z" />
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                        class="favorite-star hide" id="favorite-star-full" onclick="toggleFavoriteStar()">
-                        <path fill="rgb(var(--star-yellow))"
-                            d="m12 17.3l-3.7 2.825q-.275.225-.6.213t-.575-.188q-.25-.175-.387-.475t-.013-.65L8.15 14.4l-3.625-2.575q-.3-.2-.375-.525t.025-.6q.1-.275.35-.488t.6-.212H9.6l1.45-4.8q.125-.35.388-.538T12 4.475q.3 0 .563.188t.387.537L14.4 10h4.475q.35 0 .6.213t.35.487q.1.275.025.6t-.375.525L15.85 14.4l1.425 4.625q.125.35-.012.65t-.388.475q-.25.175-.575.188t-.6-.213L12 17.3Z" />
-                    </svg>
+                    <?php include './src/php/toggleFavIndicator.php'; ?>
                     <h2>
                         <?php echo $row["address"] ?>
                     </h2>
@@ -327,12 +324,17 @@ if (!isset($_SESSION)) {
                             foreach ($resultReviewList as $review) {
                                 ?>
                                 <div class="details-info-text">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"class="review-star">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                        class="review-star">
                                         <path fill="rgb(var(--star-yellow))"
                                             d="m12 17.3l-3.7 2.825q-.275.225-.6.213t-.575-.188q-.25-.175-.387-.475t-.013-.65L8.15 14.4l-3.625-2.575q-.3-.2-.375-.525t.025-.6q.1-.275.35-.488t.6-.212H9.6l1.45-4.8q.125-.35.388-.538T12 4.475q.3 0 .563.188t.387.537L14.4 10h4.475q.35 0 .6.213t.35.487q.1.275.025.6t-.375.525L15.85 14.4l1.425 4.625q.125.35-.012.65t-.388.475q-.25.175-.575.188t-.6-.213L12 17.3Z" />
                                     </svg>
-                                    <p><b><?php echo sprintf("%.1f", $review["rating"]) ?></b></p>
-                                    <p><?php echo $review["description"] ?></p>
+                                    <p><b>
+                                            <?php echo sprintf("%.1f", $review["rating"]) ?>
+                                        </b></p>
+                                    <p>
+                                        <?php echo $review["description"] ?>
+                                    </p>
                                 </div>
                             <?php } ?>
                         </div>
