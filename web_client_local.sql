@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2023 at 02:41 PM
+-- Generation Time: Oct 26, 2023 at 08:16 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -30,10 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `client` (
   `id` bigint(20) NOT NULL,
   `username` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `premium_id` bigint(20) DEFAULT NULL,
   `level` int(11) NOT NULL,
   `xp` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_latvian_ci;
@@ -42,17 +40,17 @@ CREATE TABLE `client` (
 -- Dumping data for table `client`
 --
 
-INSERT INTO `client` (`id`, `username`, `password`, `email`, `image`, `premium_id`, `level`, `xp`) VALUES
-(1, 'user', 'user', 'user@user.com', 'https://i.ibb.co/7NMy1pv/profile1.jpg', NULL, 1, 20),
-(2, 'user2', 'user2', 'user2@user.com', 'https://i.ibb.co/rGf9P3C/profile2.jpg', 1, 5, 250),
-(3, 'user3', 'user3', 'user3@user.com', 'https://i.ibb.co/tBHFxCZ/profile3.jpg', NULL, 16, 1200),
-(4, 'user4', 'user4', 'user4@user.com', 'https://i.ibb.co/WHGTMTX/profile4.jpg', 2, 2, 150),
-(5, 'user5', 'user5', 'user5@user.com', 'https://i.ibb.co/fDYhLX9/profile5.jpg', 3, 12, 1000),
-(6, 'user6', 'user6', 'user6@user.com', 'https://i.ibb.co/0J3MLqM/profile6.jpg', 4, 19, 3000),
-(7, 'user7', 'user7', 'user7@user.com', 'https://i.ibb.co/Jz0cR1V/profile7.jpg', NULL, 1, 20),
-(8, 'user8', 'user8', 'user8@user.com', 'https://i.ibb.co/B30M3nw/profile8.jpg', NULL, 8, 800),
-(9, 'user9', 'user9', 'user9@user.com', 'https://i.ibb.co/wQsS2wN/profile9.jpg', NULL, 3, 175),
-(10, 'user10', 'user10', 'user10@user.com', 'https://i.ibb.co/9Y68Hq3/profile10.jpg', 5, 10, 950);
+INSERT INTO `client` (`id`, `username`, `email`, `image`, `level`, `xp`) VALUES
+(1, 'user', 'user@user.com', 'https://i.ibb.co/7NMy1pv/profile1.jpg', 1, 20),
+(2, 'user2', 'user2@user.com', 'https://i.ibb.co/rGf9P3C/profile2.jpg', 5, 250),
+(3, 'user3', 'user3@user.com', 'https://i.ibb.co/tBHFxCZ/profile3.jpg', 16, 1200),
+(4, 'user4', 'user4@user.com', 'https://i.ibb.co/WHGTMTX/profile4.jpg', 2, 150),
+(5, 'user5', 'user5@user.com', 'https://i.ibb.co/fDYhLX9/profile5.jpg', 12, 1000),
+(6, 'user6', 'user6@user.com', 'https://i.ibb.co/0J3MLqM/profile6.jpg', 19, 3000),
+(7, 'user7', 'user7@user.com', 'https://i.ibb.co/Jz0cR1V/profile7.jpg', 1, 20),
+(8, 'user8', 'user8@user.com', 'https://i.ibb.co/B30M3nw/profile8.jpg', 8, 800),
+(9, 'user9', 'user9@user.com', 'https://i.ibb.co/wQsS2wN/profile9.jpg', 3, 175),
+(10, 'user10', 'user10@user.com', 'https://i.ibb.co/9Y68Hq3/profile10.jpg', 10, 950);
 
 -- --------------------------------------------------------
 
@@ -63,7 +61,6 @@ INSERT INTO `client` (`id`, `username`, `password`, `email`, `image`, `premium_i
 CREATE TABLE `client_data` (
 `clientID` bigint(20)
 ,`username` varchar(45)
-,`password` varchar(45)
 ,`email` varchar(45)
 ,`image` varchar(255)
 ,`premiumID` bigint(20)
@@ -146,18 +143,18 @@ CREATE TABLE `parking` (
   `price` double NOT NULL,
   `is_premium` tinyint(1) NOT NULL,
   `partner_id` bigint(20) NOT NULL,
-  `max_spots` int(11) NOT NULL,
+  `max_spots_count` int(11) NOT NULL,
   `spots_taken` int(11) NOT NULL,
   `start_time` datetime NOT NULL,
   `end_time` datetime NOT NULL,
-  `is_for_disabled` tinyint(1) NOT NULL
+  `is_disabled` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_latvian_ci;
 
 --
 -- Dumping data for table `parking`
 --
 
-INSERT INTO `parking` (`id`, `address`, `price`, `is_premium`, `partner_id`, `max_spots`, `spots_taken`, `start_time`, `end_time`, `is_for_disabled`) VALUES
+INSERT INTO `parking` (`id`, `address`, `price`, `is_premium`, `partner_id`, `max_spots_count`, `spots_taken`, `start_time`, `end_time`, `is_disabled`) VALUES
 (1, 'Rumbulas, bld. 1/2, Rīga', 0, 0, 1, 24, 15, '2023-09-01 00:00:00', '2023-12-31 23:59:59', 0),
 (2, 'Brīvības iela 374, Rīga', 0, 0, 2, 120, 85, '2023-09-01 00:00:00', '2023-12-31 23:59:59', 1),
 (3, 'K.Valdemāra iela 5a, Rīga', 1.5, 1, 3, 80, 23, '2023-09-01 00:00:00', '2023-12-31 23:59:59', 1),
@@ -196,14 +193,14 @@ CREATE TABLE `parking_list` (
 
 CREATE TABLE `partner` (
   `id` bigint(20) NOT NULL,
-  `company_name` varchar(45) NOT NULL
+  `comp_name` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_latvian_ci;
 
 --
 -- Dumping data for table `partner`
 --
 
-INSERT INTO `partner` (`id`, `company_name`) VALUES
+INSERT INTO `partner` (`id`, `comp_name`) VALUES
 (1, 'Rumbulas'),
 (2, 'Alfa'),
 (3, 'Rīgas satiksme');
@@ -217,19 +214,20 @@ INSERT INTO `partner` (`id`, `company_name`) VALUES
 CREATE TABLE `premium` (
   `id` bigint(20) NOT NULL,
   `end_date` datetime NOT NULL,
-  `discount` double NOT NULL
+  `discount_amount` double NOT NULL,
+  `client_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_latvian_ci;
 
 --
 -- Dumping data for table `premium`
 --
 
-INSERT INTO `premium` (`id`, `end_date`, `discount`) VALUES
-(1, '2023-12-31 23:59:59', 0.25),
-(2, '2024-12-31 23:59:59', 0.15),
-(3, '2024-12-31 23:59:59', 0.3),
-(4, '2023-12-31 23:59:59', 0.5),
-(5, '2024-12-31 23:59:59', 0.25);
+INSERT INTO `premium` (`id`, `end_date`, `discount_amount`, `client_id`) VALUES
+(1, '2023-12-31 23:59:59', 0.25, 2),
+(2, '2024-12-31 23:59:59', 0.15, 4),
+(3, '2024-12-31 23:59:59', 0.3, 5),
+(4, '2023-12-31 23:59:59', 0.5, 6),
+(5, '2024-12-31 23:59:59', 0.25, 10);
 
 -- --------------------------------------------------------
 
@@ -291,7 +289,6 @@ CREATE TABLE `reservation_list` (
 ,`username` varchar(45)
 ,`email` varchar(45)
 ,`parking_id` bigint(20)
-,`start_time` datetime
 ,`end_time` datetime
 ,`address` varchar(90)
 ,`company_name` varchar(45)
@@ -309,7 +306,7 @@ CREATE TABLE `review` (
   `title` varchar(45) NOT NULL,
   `description` varchar(500) NOT NULL,
   `rating` int(11) NOT NULL,
-  `time` datetime NOT NULL,
+  `posted_time` datetime NOT NULL,
   `client_id` bigint(20) NOT NULL,
   `parking_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_latvian_ci;
@@ -318,7 +315,7 @@ CREATE TABLE `review` (
 -- Dumping data for table `review`
 --
 
-INSERT INTO `review` (`id`, `title`, `description`, `rating`, `time`, `client_id`, `parking_id`) VALUES
+INSERT INTO `review` (`id`, `title`, `description`, `rating`, `posted_time`, `client_id`, `parking_id`) VALUES
 (1, 'Very accessible', 'The parking spot was conveniently located near the entrance, making it easy to access.', 4, '2023-09-01 00:00:00', 1, 1),
 (2, 'Cleanliness', 'The parking space was well-maintained and clean.', 5, '2023-09-01 00:00:00', 2, 1),
 (3, 'Easy to find', 'The availability of ample parking spots eased the search.', 5, '2023-09-20 11:59:59', 3, 1),
@@ -371,7 +368,7 @@ CREATE TABLE `review_list` (
 --
 DROP TABLE IF EXISTS `client_data`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `client_data`  AS SELECT `client`.`id` AS `clientID`, `client`.`username` AS `username`, `client`.`password` AS `password`, `client`.`email` AS `email`, `client`.`image` AS `image`, `premium`.`id` AS `premiumID`, `client`.`level` AS `level`, `client`.`xp` AS `XP`, `premium`.`end_date` AS `Premium_ends`, `premium`.`discount` AS `discount` FROM (`client` left join `premium` on(`client`.`premium_id` = `premium`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `client_data`  AS SELECT `client`.`id` AS `clientID`, `client`.`username` AS `username`, `client`.`email` AS `email`, `client`.`image` AS `image`, `premium`.`id` AS `premiumID`, `client`.`level` AS `level`, `client`.`xp` AS `XP`, `premium`.`end_date` AS `Premium_ends`, `premium`.`discount_amount` AS `discount` FROM (`client` left join `premium` on(`client`.`id` = `premium`.`client_id`)) ;
 
 -- --------------------------------------------------------
 
@@ -389,7 +386,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `parking_list`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `parking_list`  AS SELECT `parking`.`id` AS `id`, `parking`.`address` AS `address`, `partner`.`company_name` AS `company_name`, `parking`.`price` AS `price`, `parking`.`is_premium` AS `is_premium`, `parking`.`max_spots` AS `max_spots`, `parking`.`spots_taken` AS `spots_taken`, `parking`.`start_time` AS `start_time`, `parking`.`end_time` AS `end_time`, `parking`.`is_for_disabled` AS `is_for_disabled` FROM (`parking` left join `partner` on(`parking`.`partner_id` = `partner`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `parking_list`  AS SELECT `parking`.`id` AS `id`, `parking`.`address` AS `address`, `partner`.`comp_name` AS `company_name`, `parking`.`price` AS `price`, `parking`.`is_premium` AS `is_premium`, `parking`.`max_spots_count` AS `max_spots`, `parking`.`spots_taken` AS `spots_taken`, `parking`.`start_time` AS `start_time`, `parking`.`end_time` AS `end_time`, `parking`.`is_disabled` AS `is_for_disabled` FROM (`parking` left join `partner` on(`parking`.`partner_id` = `partner`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -398,7 +395,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `reservation_list`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `reservation_list`  AS SELECT `client`.`id` AS `id`, `client`.`username` AS `username`, `client`.`email` AS `email`, `parking`.`id` AS `parking_id`, `parking`.`start_time` AS `start_time`, `reservation`.`end_time` AS `end_time`, `parking`.`address` AS `address`, `partner`.`company_name` AS `company_name`, `parking`.`price` AS `price` FROM (((`client` left join `reservation` on(`client`.`id` = `reservation`.`client_id`)) left join `parking` on(`reservation`.`parking_id` = `parking`.`id`)) left join `partner` on(`parking`.`partner_id` = `partner`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `reservation_list`  AS SELECT `client`.`id` AS `id`, `client`.`username` AS `username`, `client`.`email` AS `email`, `parking`.`id` AS `parking_id`, `reservation`.`end_time` AS `end_time`, `parking`.`address` AS `address`, `partner`.`comp_name` AS `company_name`, `parking`.`price` AS `price` FROM (((`client` left join `reservation` on(`client`.`id` = `reservation`.`client_id`)) left join `parking` on(`reservation`.`parking_id` = `parking`.`id`)) left join `partner` on(`parking`.`partner_id` = `partner`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -419,8 +416,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 ALTER TABLE `client`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `Username` (`username`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `PremiumID` (`premium_id`) USING BTREE;
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `favorite_parking`
@@ -446,7 +442,8 @@ ALTER TABLE `partner`
 -- Indexes for table `premium`
 --
 ALTER TABLE `premium`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `client_id` (`client_id`);
 
 --
 -- Indexes for table `reservation`
@@ -485,7 +482,7 @@ ALTER TABLE `parking`
 -- Constraints for table `premium`
 --
 ALTER TABLE `premium`
-  ADD CONSTRAINT `premium_ibfk_1` FOREIGN KEY (`id`) REFERENCES `client` (`premium_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `premium_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `client` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `reservation`
